@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.entityframeworkcore.sqlserver\8.0.3\lib\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Migrations\20240318192855_DatabaseSetup.cs" />
+      <Compile Remove="Migrations\20240318192855_DatabaseSetup.Designer.cs" />
+    </ItemGroup>
+
+</Project>
