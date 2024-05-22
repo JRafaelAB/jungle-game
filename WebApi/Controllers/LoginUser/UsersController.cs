@@ -27,7 +27,7 @@ public class UsersController(ILoginUserUseCase useCase) : BaseController
     }
     
     
-    /// <summary>
+    /// <summary> 
     /// Cria um usuário.
     /// </summary>
     /// <response code="200">Successfull request.</response>
