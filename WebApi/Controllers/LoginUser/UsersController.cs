@@ -25,4 +25,21 @@ public class UsersController(ILoginUserUseCase useCase) : BaseController
         ValidateRequest(request);
         return Ok(await useCase.Execute(request));
     }
+    
+    
+    /// <summary>
+    /// Cria um usuário.
+    /// </summary>
+    /// <response code="200">Successfull request.</response>
+    /// <response code="400">Invalid Request.</response>
+    /// <param name="request"></param>
+    [HttpPost("Example")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Example([FromBody] LoginUserRequest request)
+    {
+        ValidateRequest(request);
+        await Task.WhenAny();
+        return Ok("All is fine");
+    }
 }
