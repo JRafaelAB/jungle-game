@@ -14,9 +14,9 @@ internal static class SqlExtensions
 {
     public static IServiceCollection AddSQLServer(this IServiceCollection services, IConfiguration configuration)
     {
-        string? connectionString = configuration.GetConnectionString(ConfigurationConstants.TOOLS_BD_CONNECTION_STRING);
+        string? connectionString = configuration.GetConnectionString(ConfigurationConstants.JUNGLE_DB_CONNECTION_STRING);
         
-        services.AddDbContext<UsersContext>(
+        services.AddDbContext<JungleContext>(
             options =>
             {
                 options.UseSqlServer(connectionString, option => option.MigrationsAssembly(nameof(Infrastructure)));

@@ -2,6 +2,6 @@
 
 public static class ConfigurationConstants
 {
-    public const string TOOLS_BD_CONNECTION_STRING = "ToolsDb";
+    public const string JUNGLE_DB_CONNECTION_STRING = "JungleDb";
     public const string USER_SALT_SIZE = "UserSaltSize";
 }

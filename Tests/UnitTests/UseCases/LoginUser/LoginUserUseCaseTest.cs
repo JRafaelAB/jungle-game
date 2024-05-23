@@ -89,8 +89,8 @@ public class LoginUserUseCaseTest
 
     private void ConfigureUserRepositoryForExistingLogin()
     {
-        this._userRepository.Setup(repo => repo.GetUserByUsernameOrEmail("user1")).ReturnsAsync(ToolsContextMock.User1Dto);
+        this._userRepository.Setup(repo => repo.GetUserByUsernameOrEmail("user1")).ReturnsAsync(JungleContextMock.User1Dto);
         
-        this._userRepository.Setup(repo => repo.GetUserByUsernameOrEmail("user1@gmail.com")).ReturnsAsync(ToolsContextMock.User1Dto);
+        this._userRepository.Setup(repo => repo.GetUserByUsernameOrEmail("user1@gmail.com")).ReturnsAsync(JungleContextMock.User1Dto);
     }
 }

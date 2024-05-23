@@ -7,12 +7,12 @@ namespace UnitTests.DataAccess;
 
 public class UnitOfWorkTest
 {
-    private readonly Mock<UsersContext> _context;
+    private readonly Mock<JungleContext> _context;
     private readonly UnitOfWork _unitOfWork;
         
     public UnitOfWorkTest()
     {
-        this._context = new Mock<UsersContext>();
+        this._context = new Mock<JungleContext>();
         this._unitOfWork = new UnitOfWork(this._context.Object);
     }
         

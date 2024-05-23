@@ -3,7 +3,7 @@ using Infrastructure.DataAccess.Contexts;
 
 namespace Infrastructure.DataAccess;
 
-public class UnitOfWork(UsersContext usersContext) : IUnitOfWork, IDisposable
+public class UnitOfWork(JungleContext jungleContext) : IUnitOfWork, IDisposable
 {
     private bool _disposed;
 
@@ -15,7 +15,7 @@ public class UnitOfWork(UsersContext usersContext) : IUnitOfWork, IDisposable
 
     public async Task<int> Save()
     {
-        int affectedRows = await usersContext
+        int affectedRows = await jungleContext
             .SaveChangesAsync();
         return affectedRows;
     }
@@ -24,7 +24,7 @@ public class UnitOfWork(UsersContext usersContext) : IUnitOfWork, IDisposable
     {
         if (!this._disposed && disposing)
         {
-            usersContext.Dispose();
+            jungleContext.Dispose();
         }
 
         this._disposed = true;

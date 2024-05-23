@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.DataAccess.Contexts;
 
 [ExcludeFromCodeCoverage]
-public class UsersContext : DbContext
+public class JungleContext : DbContext
 {
 
     public virtual DbSet<User> Users { get; init; } = null!;
     
-    public UsersContext()
+    public JungleContext()
     {
     }
 
-    public UsersContext(DbContextOptions<UsersContext> options) : base(options)
+    public JungleContext(DbContextOptions<JungleContext> options) : base(options)
     {
     }
 
@@ -23,6 +23,6 @@ public class UsersContext : DbContext
     {
         modelBuilder.ValidateNullArgument(nameof(modelBuilder));
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsersContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(JungleContext).Assembly);
     }
 }

@@ -7,4 +7,4 @@ namespace Infrastructure.Migrations;
 public partial class DatabaseSetup;
 
 [ExcludeFromCodeCoverage]
-public partial class ToolsContextModelSnapshot;
+public partial class JungleContextModelSnapshot;

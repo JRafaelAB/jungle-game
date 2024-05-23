@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository(UsersContext context) : IUserRepository
+public class UserRepository(JungleContext context) : IUserRepository
 {
     public async Task AddUser(UserDto userDto)
     {

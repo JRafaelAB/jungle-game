@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests;
 
-public static class ToolsContextMock
+public static class JungleContextMock
 {
-    public static UsersContext StartNewContext()
+    public static JungleContext StartNewContext()
     {
-        var options = new DbContextOptionsBuilder<UsersContext>()
+        var options = new DbContextOptionsBuilder<JungleContext>()
             .UseInMemoryDatabase(databaseName: "database")
             .Options;
         
-        var context = new UsersContext(options);
+        var context = new JungleContext(options);
         context.Database.EnsureDeleted();
         context.Users.Add(User1);
         context.Users.Add(User2);
