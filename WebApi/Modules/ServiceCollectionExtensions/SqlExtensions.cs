@@ -19,8 +19,7 @@ internal static class SqlExtensions
         services.AddDbContext<UsersContext>(
             options =>
             {
-                //options.UseSqlServer(connectionString, option => option.MigrationsAssembly(nameof(Infrastructure)));
-                options.UseInMemoryDatabase(databaseName: "database");
+                options.UseSqlServer(connectionString, option => option.MigrationsAssembly(nameof(Infrastructure)));
             });
         
         services.AddScoped<IUserRepository, UserRepository>();
