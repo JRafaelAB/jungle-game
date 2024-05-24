@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Application.UseCases.CreateUser;
+using Application.UseCases.GetUser;
 using Application.UseCases.LoginUser;
 
 namespace WebApi.Modules.ServiceCollectionExtensions;
@@ -11,6 +12,7 @@ public static class UseCasesExtensions
     {
         services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
+        services.AddScoped<IGetUserUseCase, GetUserUseCase>();
 
         return services;
     }

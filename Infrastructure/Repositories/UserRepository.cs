@@ -12,6 +12,13 @@ public class UserRepository(JungleContext context) : IUserRepository
     {
         User userEntity = new(userDto);
         await context.Users.AddAsync(userEntity);
+    } 
+    
+    public async Task<UserDto?> GetUser(ulong userId)
+    {
+        var user = await context.Users.Where(user => user.Id == userId)
+            .SingleOrDefaultAsync();
+        return user == null ? null : new UserDto(user);
     }
 
     public async Task<UserDto?> GetUserByUsername(string username)
