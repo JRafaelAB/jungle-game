@@ -2,7 +2,6 @@
 using Domain.Models.Requests;
 using Domain.Repositories;
 using Domain.Resources;
-using Domain.Utils;
 
 namespace Application.UseCases.LoginUser;
 
@@ -14,8 +13,7 @@ public class LoginUserUseCase(IUserRepository repository) : ILoginUserUseCase
         
         if (user != null)
         {
-            var encryptedPassword = Cryptography.EncryptPassword(request.Password, user.Salt);
-            if (encryptedPassword == user.Password) return 1;
+            if (user.ValidatePassword(request.Password)) return 1;
         }
         
         throw new UserNotFoundException(Messages.InvalidUser);
