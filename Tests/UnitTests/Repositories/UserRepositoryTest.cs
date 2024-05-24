@@ -79,4 +79,23 @@ public class UserRepositoryTest
         var result = await repository.GetUserByUsernameOrEmail("Bananinha Maligna");
         Assert.Null(result);
     }
+    
+    [Fact]
+    public async Task Test_Get_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var result = await repository.GetUser(4);
+        Assert.NotNull(result);
+        Assert.Equal(new UserDto(JungleContextMock.User4), result);
+    }
+    
+    [Fact]
+    public async Task Test_Get_Non_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var result = await repository.GetUser(10);
+        Assert.Null(result);
+    }
 }
