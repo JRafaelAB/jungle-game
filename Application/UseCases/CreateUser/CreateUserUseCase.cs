@@ -9,7 +9,7 @@ namespace Application.UseCases.CreateUser;
 
 public class CreateUserUseCase(IUserRepository repository, IUnitOfWork unitOfWork) : ICreateUserUseCase
 {
-    public async Task Execute(CreateUserRequest request)
+    public async Task Execute(UserRequest request)
     {
         await ValidateExistingUser(request);
         UserDto user = new(request);
@@ -17,7 +17,7 @@ public class CreateUserUseCase(IUserRepository repository, IUnitOfWork unitOfWor
         await unitOfWork.Save();
     }
 
-    private async Task ValidateExistingUser(CreateUserRequest request)
+    private async Task ValidateExistingUser(UserRequest request)
     {
         var isValid = true;
         var errors = new List<string>();

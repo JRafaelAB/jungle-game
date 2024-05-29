@@ -1,5 +1,6 @@
 ﻿using Domain.DTOs;
 using Domain.Entities;
+using Domain.Models.Requests;
 using Domain.Utils;
 using Infrastructure.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -42,4 +43,5 @@ public static class JungleContextMock
     public static readonly User User9 = new("user9", "user9@gmail.com", Cryptography.EncryptPassword("password", "salt"), "salt");
     public static readonly UserDto NewUser1Dto = new("NewUser1", "NewUser1@gmail.com", "password", "salt");
     public static readonly User NewUser1 = new("NewUser1", "NewUser1@gmail.com", "password", "salt");
+    public static readonly UserRequest User1Request = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
 }

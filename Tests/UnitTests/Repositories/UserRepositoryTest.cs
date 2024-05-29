@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs;
+using Domain.Models.Requests;
 using Infrastructure.Repositories;
 using Xunit;
 
@@ -97,5 +98,31 @@ public class UserRepositoryTest
         var repository = new UserRepository(context);
         var result = await repository.GetUser(10);
         Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task Test_Update_Non_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
+        var userDto = new UserDto(request, 15);
+        var result = await repository.UpdateUser(userDto);
+        Assert.False(result);
+    }
+
+    [Fact]
+    public async Task Test_Update_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
+        var userDto = new UserDto(request, 9);
+        var result = await repository.UpdateUser(userDto);
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)9);
+        Assert.Equal("Pedro", user!.Username);
+        Assert.Equal("pedro@teste.com", user.Email);
+        Assert.Equal("1234", user.Password);
     }
 }

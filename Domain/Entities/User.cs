@@ -5,13 +5,19 @@ namespace Domain.Entities;
 public class User(string username, string email, string password, string salt, ulong? Id = null)
 {
     public ulong? Id { get; } = Id;
-    public string Username { get; } = username;
-    public string Email { get; } = email;
-    public string Password { get; } = password;
+    public string Username { get; private set; } = username;
+    public string Email { get; private set; } = email;
+    public string Password { get; private set; } = password;
     public string Salt { get; } = salt;
 
     public User(UserDto userDto) : this(userDto.Username, userDto.Email, userDto.Password, userDto.Salt, userDto.Id) { }
 
+    public void Update(UserDto userDto)
+    {
+        this.Username = userDto.Username;
+        this.Email = userDto.Email;
+        this.Password = userDto.Password;
+    }
     protected bool Equals(User other)
     {
         return Username == other.Username && Email == other.Email && Password == other.Password && Salt == other.Salt;

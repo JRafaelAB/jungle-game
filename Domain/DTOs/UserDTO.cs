@@ -8,10 +8,10 @@ namespace Domain.DTOs
     public class UserDto
     {
         public ulong? Id { get; }
-        public string Username { get; }
-        public string Email { get; }
-        public string Password { get; }
-        public string Salt { get; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string? Salt { get; }
 
         public UserDto(User user)
         {
@@ -20,6 +20,13 @@ namespace Domain.DTOs
             this.Email = user.Email;
             this.Password = user.Password;
             this.Salt = user.Salt;
+        }
+        public UserDto(UserRequest user, ulong id)
+        {
+            this.Id = id;
+            this.Username = user.Username;
+            this.Email = user.Email;
+            this.Password = user.Password;
         }
 
         public UserDto(string username, string email, string password, string salt)
@@ -30,7 +37,7 @@ namespace Domain.DTOs
             this.Salt = salt;
         }
 
-        public UserDto(CreateUserRequest request)
+        public UserDto(UserRequest request)
         {
             var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
             var salt = Cryptography.GenerateSalt(size);
@@ -50,7 +57,7 @@ namespace Domain.DTOs
 
         protected bool Equals(UserDto other)
         {
-            return this.Username == other.Username && this.Email == other.Email;
+            return this.Username == other.Username && this.Email == other.Email && this.Id == other.Id;
         }
 
         public override bool Equals(object? obj)
