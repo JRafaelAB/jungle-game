@@ -12,10 +12,9 @@ public class UserRepositoryTest
     {
         await using var context = JungleContextMock.StartNewContext();
         var repository = new UserRepository(context);
-        var id = await repository.AddUser(JungleContextMock.NewUser1Dto);
+        await repository.AddUser(JungleContextMock.NewUser1Dto);
         await context.SaveChangesAsync();
         Assert.Contains(JungleContextMock.NewUser1, context.Users);
-        Assert.NotNull(id);
     }
     
     [Fact]

@@ -8,10 +8,10 @@ namespace Infrastructure.Repositories;
 
 public class UserRepository(JungleContext context) : IUserRepository
 {
-    public async Task<ulong?> AddUser(UserDto userDto)
+    public async Task AddUser(UserDto userDto)
     {
         User userEntity = new(userDto);
-        return (await context.Users.AddAsync(userEntity)).Entity.Id;
+        await context.Users.AddAsync(userEntity);
     } 
     
     public async Task<UserDto?> GetUser(ulong userId)

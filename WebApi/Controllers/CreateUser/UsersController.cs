@@ -26,7 +26,7 @@ public class UsersController(ICreateUserUseCase createUserUseCase) : BaseControl
     public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
     {
         ValidateRequest(request);
-        var id = await createUserUseCase.Execute(request);
-        return Created(new Uri(Request.GetEncodedUrl() + $"/{id}"), null);
+        var username = await createUserUseCase.Execute(request);
+        return Created(new Uri(Request.GetEncodedUrl() + $"/{username}"), null);
     }
 }

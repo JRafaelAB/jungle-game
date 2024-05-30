@@ -28,7 +28,7 @@ public class PostUserUseCaseTest
     {
         UserDto user = new("usuario", "email", "10", "10");
 
-        var result = await _useCase.Execute(CreateUserUseCaseDataSetup.validUser);
+        await _useCase.Execute(CreateUserUseCaseDataSetup.validUser);
         
         this._userRepository.Verify(repo => repo.AddUser(user), Times.Once);
         this._userRepository.Verify(repo => repo.GetUserByUsername("usuario"), Times.Once);
