@@ -2,6 +2,7 @@
 using Domain.Exceptions;
 using Domain.Models.Requests;
 using Domain.Resources;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
@@ -19,6 +20,18 @@ public class UsersControllerTest
     {
         this._createUser = new Mock<ICreateUserUseCase>();
         this._controller = new UsersController(_createUser.Object);
+        var httpContext = new DefaultHttpContext
+        {
+            Request =
+            {
+                Scheme = "http",
+                Host = new HostString("localhost")
+            }
+        };
+        var controllerContext = new ControllerContext() {
+            HttpContext = httpContext
+        };
+        _controller.ControllerContext = controllerContext;
     }
 
     [Fact]
