@@ -1,9 +1,9 @@
 ﻿using Domain.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.DataAccess.Contexts;
 
 namespace Infrastructure.DataAccess;
 
-public class UnitOfWork(DbContext jungleContext) : IUnitOfWork, IDisposable
+public class UnitOfWork(JungleContext jungleContext) : IUnitOfWork, IDisposable
 {
     private bool _disposed;
 
