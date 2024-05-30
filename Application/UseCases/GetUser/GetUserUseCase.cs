@@ -7,12 +7,12 @@ namespace Application.UseCases.GetUser;
 
 public class GetUserUseCase(IUserRepository repository) : IGetUserUseCase
 {
-    public async Task<GetUserResponse> Execute(ulong userId)
+    public async Task<GetUserResponse> Execute(string user)
     {
-        var user = await repository.GetUser(userId);
+        var userDto = await repository.GetUserByUsernameOrEmail(user);
         
-        if (user == null) throw new UserNotFoundException(Messages.UserNotFound);
+        if (userDto == null) throw new UserNotFoundException(Messages.UserNotFound);
 
-        return new GetUserResponse(user);
+        return new GetUserResponse(userDto);
     }
 }
