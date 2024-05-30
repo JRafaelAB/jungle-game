@@ -33,7 +33,7 @@ public class GetUserUseCaseTest
     public async Task Test_Get_Non_Existing_User()
     {
         var ex = await Assert.ThrowsAsync<UserNotFoundException>(() => this._useCase.Execute("NonExistingUser"));
-        Assert.Equal(Messages.UserNotFound, ex.Message);
+        Assert.Equal(Messages.UserNotFound, ex.ErrorMessages.SingleOrDefault());
     }
     
     private void ConfigureUserRepositoryForExistingUser()

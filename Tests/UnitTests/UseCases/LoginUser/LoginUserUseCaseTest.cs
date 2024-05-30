@@ -50,7 +50,7 @@ public class LoginUserUseCaseTest
         }
         Assert.NotNull(exception);
         Assert.IsType<UserNotFoundException>(exception);
-        Assert.Equal(Messages.InvalidUser, exception!.Message);
+        Assert.Equal(Messages.InvalidUser, ((UserNotFoundException)exception).ErrorMessages.SingleOrDefault());
     }
 
     [Fact]
@@ -67,7 +67,7 @@ public class LoginUserUseCaseTest
         }
         Assert.NotNull(exception);
         Assert.IsType<UserNotFoundException>(exception);
-        Assert.Equal(Messages.InvalidUser, exception!.Message);
+        Assert.Equal(Messages.InvalidUser, ((UserNotFoundException)exception).ErrorMessages.SingleOrDefault());
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class LoginUserUseCaseTest
         }
         Assert.NotNull(exception);
         Assert.IsType<UserNotFoundException>(exception);
-        Assert.Equal(Messages.InvalidUser, exception!.Message);
+        Assert.Equal(Messages.InvalidUser, ((UserNotFoundException)exception).ErrorMessages.SingleOrDefault());
     }
 
     private void ConfigureUserRepositoryForExistingLogin()

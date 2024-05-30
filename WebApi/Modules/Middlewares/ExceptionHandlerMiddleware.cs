@@ -17,25 +17,11 @@ internal static class ExceptionHandlerMiddleware
         context.Response.ContentType = MediaTypeNames.Application.Json;
         switch (contextFeature?.Error)
         {
-            /*
-            case InvalidLoginException invalidLogin:
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                logger.Error($"Invalid Login: {JsonConvert.SerializeObject(invalidLogin.notificationError)}");
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidLogin.notificationError));
-                break;
-            */
             
-            case LoginConflictException loginConflict:
-                context.Response.StatusCode = StatusCodes.Status409Conflict;
-                //logger.Error($"Login Conflict: {JsonConvert.SerializeObject(loginConflict.notificationError)}");
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(loginConflict));
-                break;
-            
-            
-            case InvalidRequestException invalidRequest:
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                //logger.Error($"Invalid Request: {JsonConvert.SerializeObject(invalidRequest)}");
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest));
+            case ExceptionBase exception:
+                context.Response.StatusCode = exception.HttpStatus;
+                //logger.Error($"Invalid Login: {JsonConvert.SerializeObject(exception)}");
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(exception));
                 break;
             
             default:
