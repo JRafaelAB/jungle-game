@@ -33,6 +33,8 @@ public static class JungleContextMock
     public static readonly User User1 = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"), "salt");
     public static readonly UserDto User1Dto = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", 
         "salt"), "salt");
+    public static readonly UserDto User2Dto = new("user2", "user2@gmail.com", Cryptography.EncryptPassword("password",
+        "salt"), "salt");
     public static readonly User User2 = new("user2", "user2@gmail.com", Cryptography.EncryptPassword("password", "salt"), "salt");
     public static readonly User User3 = new("user3", "user3@gmail.com", Cryptography.EncryptPassword("password", "salt"), "salt");
     public static readonly User User4 = new("user4", "user4@gmail.com", Cryptography.EncryptPassword("password", "salt"), "salt");
@@ -44,4 +46,7 @@ public static class JungleContextMock
     public static readonly UserDto NewUser1Dto = new("NewUser1", "NewUser1@gmail.com", "password", "salt");
     public static readonly User NewUser1 = new("NewUser1", "NewUser1@gmail.com", "password", "salt");
     public static readonly UserRequest User1Request = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserRequest UpdateUser11Request = new("user11", "user11@gmail.com", Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserRequest UpdateUserExistingUsernameRequest = new("user2", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
 }
