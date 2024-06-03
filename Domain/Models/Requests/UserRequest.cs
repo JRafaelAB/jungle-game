@@ -4,7 +4,7 @@ using Domain.Models.Validators;
 
 namespace Domain.Models.Requests;
 
-public class CreateUserRequest(string username, string email, string password)
+public class UserRequest(string username, string email, string password)
 {
     [Required(AllowEmptyStrings = false)]
     [MaxLength(25)]

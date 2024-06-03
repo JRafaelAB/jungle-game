@@ -8,10 +8,10 @@ namespace Domain.DTOs
     public class UserDto
     {
         public ulong? Id { get; init; }
-        public string Username { get; }
-        public string Email { get; }
-        public string Password { get; }
-        public string Salt { get; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string? Salt { get; }
 
         public UserDto(User user)
         {
@@ -30,27 +30,30 @@ namespace Domain.DTOs
             this.Salt = salt;
         }
 
-        public UserDto(CreateUserRequest request)
+        public UserDto(UserRequest request)
         {
             var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
-            var salt = Cryptography.GenerateSalt(size);
-            var password = Cryptography.EncryptPassword(request.Password, salt);
+            this.Salt = Cryptography.GenerateSalt(size);
+            var password = Cryptography.EncryptPassword(request.Password, this.Salt);
             
             this.Username = request.Username;
             this.Email = request.Email;
             this.Password = password;
-            this.Salt = salt;
         }
 
         public bool ValidatePassword(string password)
         {
+            if (string.IsNullOrEmpty(this.Salt)) return false;
             var encryptedPassword = Cryptography.EncryptPassword(password, this.Salt);
             return encryptedPassword.Equals(this.Password);
         }
-
+        public bool ValidateUser(string user)
+        {
+            return (this.Username == user || this.Email == user);
+        }
         protected bool Equals(UserDto other)
         {
-            return this.Username == other.Username && this.Email == other.Email;
+            return this.Username == other.Username && this.Email == other.Email && this.Id == other.Id;
         }
 
         public override bool Equals(object? obj)

@@ -2,6 +2,7 @@
 using Application.UseCases.CreateUser;
 using Application.UseCases.GetUser;
 using Application.UseCases.LoginUser;
+using Application.UseCases.UpdateUser;
 
 namespace WebApi.Modules.ServiceCollectionExtensions;
 
@@ -13,6 +14,7 @@ public static class UseCasesExtensions
         services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
         services.AddScoped<IGetUserUseCase, GetUserUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 
         return services;
     }

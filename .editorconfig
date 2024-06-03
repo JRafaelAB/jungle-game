@@ -1,0 +1,10 @@
+﻿[*.cs]
+
+# IDE0005: O uso da diretiva é desnecessário.
+dotnet_diagnostic.IDE0005.severity = error
+
+# IDE0003: Remover qualificação
+dotnet_style_qualification_for_event = false
+
+# IDE0003: Remover qualificação
+dotnet_diagnostic.IDE0003.severity = none

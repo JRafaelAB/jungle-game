@@ -1,16 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{133969CC-BBCB-46EF-AA30-459B4EE015F8}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{133969CC-BBCB-46EF-AA30-459B4EE015F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{144F2714-49E3-482A-8B0F-CCAE712CB5D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{144F2714-49E3-482A-8B0F-CCAE712CB5D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{3725CD74-48A2-49B2-91D6-A86F0CE4CFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{3725CD74-48A2-49B2-91D6-A86F0CE4CFD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{1679A9C2-3FEE-4A62-AD00-91188998CAEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{1679A9C2-3FEE-4A62-AD00-91188998CAEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4112CA20-14A7-4EC3-AAE1-9486084999D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{26350461-773B-49F5-BFAA-1ED8B9302A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{26350461-773B-49F5-BFAA-1ED8B9302A17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6DDA131-C6E6-4C30-9934-D46B679B24C0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +46,9 @@ Global
 		{26350461-773B-49F5-BFAA-1ED8B9302A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26350461-773B-49F5-BFAA-1ED8B9302A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26350461-773B-49F5-BFAA-1ED8B9302A17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{26350461-773B-49F5-BFAA-1ED8B9302A17} = {4112CA20-14A7-4EC3-AAE1-9486084999D8}

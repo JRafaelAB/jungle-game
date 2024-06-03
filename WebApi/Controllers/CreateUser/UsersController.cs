@@ -23,7 +23,7 @@ public class UsersController(ICreateUserUseCase createUserUseCase) : BaseControl
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+    public async Task<IActionResult> CreateUser([FromBody] UserRequest request)
     {
         ValidateRequest(request);
         var username = await createUserUseCase.Execute(request);

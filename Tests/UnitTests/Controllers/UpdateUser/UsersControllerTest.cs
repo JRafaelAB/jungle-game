@@ -1,37 +1,24 @@
-﻿using Application.UseCases.CreateUser;
+﻿using Application.UseCases.UpdateUser;
 using Domain.Exceptions;
 using Domain.Models.Requests;
 using Domain.Resources;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
-using WebApi.Controllers.CreateUser;
+using WebApi.Controllers.UpdateUser;
 using Xunit;
 
-namespace UnitTests.Controllers.CreateUser;
+namespace UnitTests.Controllers.UpdateUser;
 
 public class UsersControllerTest
 {
     private readonly UsersController _controller;
-    private readonly Mock<ICreateUserUseCase> _createUser;
+    private readonly Mock<IUpdateUserUseCase> _updateUser;
 
     public UsersControllerTest()
     {
-        this._createUser = new Mock<ICreateUserUseCase>();
-        this._controller = new UsersController(_createUser.Object);
-        var httpContext = new DefaultHttpContext
-        {
-            Request =
-            {
-                Scheme = "http",
-                Host = new HostString("localhost")
-            }
-        };
-        var controllerContext = new ControllerContext() {
-            HttpContext = httpContext
-        };
-        _controller.ControllerContext = controllerContext;
+        this._updateUser = new Mock<IUpdateUserUseCase>();
+        this._controller = new UsersController(_updateUser.Object);
     }
 
     [Fact]
@@ -39,9 +26,9 @@ public class UsersControllerTest
     {
         ConfigureObjectValidator();
         var successRequest = JsonConvert.DeserializeObject<UserRequest>("{\"Username\":\"name\",\"Email\":\"email@email.com\",\"Password\":\"password\"}");
-        var result = await this._controller.CreateUser(successRequest!);
-        Assert.IsType<CreatedResult>(result);
-        this._createUser.Verify(x => x.Execute(successRequest!), Times.Once);
+        var result = await this._controller.UpdateUser("Pedro",successRequest!);
+        Assert.IsType<NoContentResult>(result);
+        this._updateUser.Verify(x => x.Execute(successRequest!, "Pedro"), Times.Once);
     }
 
     [Fact]
@@ -52,13 +39,13 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.CreateUser(request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
             ex = exception;
         }
-        
+
         Assert.NotNull(ex);
         var errors = ex!.ErrorMessages;
         Assert.Equal(3, errors.Count);
@@ -75,13 +62,13 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.CreateUser(request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
             ex = exception;
         }
-        
+
         Assert.NotNull(ex);
         var errors = ex!.ErrorMessages;
         Assert.Equal(2, errors.Count);
@@ -97,13 +84,13 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.CreateUser(request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
             ex = exception;
         }
-        
+
         Assert.NotNull(ex);
         var errors = ex!.ErrorMessages;
         Assert.Equal(3, errors.Count);
@@ -124,13 +111,13 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.CreateUser(request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
             ex = exception;
         }
-        
+
         Assert.NotNull(ex);
         var errors = ex!.ErrorMessages;
         Assert.Equal(1, errors.Count);
@@ -157,13 +144,13 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.CreateUser(request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
             ex = exception;
         }
-        
+
         Assert.NotNull(ex);
         var errors = ex!.ErrorMessages;
         Assert.Equal(1, errors.Count);
