@@ -21,13 +21,6 @@ namespace Domain.DTOs
             this.Password = user.Password;
             this.Salt = user.Salt;
         }
-        public UserDto(UserRequest user, ulong id)
-        {
-            this.Id = id;
-            this.Username = user.Username;
-            this.Email = user.Email;
-            this.Password = user.Password;
-        }
 
         public UserDto(string username, string email, string password, string salt)
         {
@@ -40,21 +33,24 @@ namespace Domain.DTOs
         public UserDto(UserRequest request)
         {
             var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
-            var salt = Cryptography.GenerateSalt(size);
-            var password = Cryptography.EncryptPassword(request.Password, salt);
+            this.Salt = Cryptography.GenerateSalt(size);
+            var password = Cryptography.EncryptPassword(request.Password, this.Salt);
             
             this.Username = request.Username;
             this.Email = request.Email;
             this.Password = password;
-            this.Salt = salt;
         }
 
         public bool ValidatePassword(string password)
         {
+            if (string.IsNullOrEmpty(this.Salt)) return false;
             var encryptedPassword = Cryptography.EncryptPassword(password, this.Salt);
             return encryptedPassword.Equals(this.Password);
         }
-
+        public bool ValidateUser(string user)
+        {
+            return (this.Username == user || this.Email == user);
+        }
         protected bool Equals(UserDto other)
         {
             return this.Username == other.Username && this.Email == other.Email && this.Id == other.Id;

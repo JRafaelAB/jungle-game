@@ -1,5 +1,6 @@
 ﻿using Domain.DTOs;
 using Domain.Models.Requests;
+using Domain.Utils;
 using Infrastructure.Repositories;
 using Xunit;
 
@@ -7,7 +8,11 @@ namespace UnitTests.Repositories;
 
 public class UserRepositoryTest
 {
-    
+    public UserRepositoryTest()
+    {
+        Configuration.SetConfiguration(TestConfigurationBuilder.BuildTestConfiguration());
+    }
+
     [Fact]
     public async Task Test_Add_New_User()
     {
@@ -106,23 +111,41 @@ public class UserRepositoryTest
         await using var context = JungleContextMock.StartNewContext();
         var repository = new UserRepository(context);
         var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
-        var userDto = new UserDto(request, 15);
-        var result = await repository.UpdateUser(userDto);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "Jonas");
         Assert.False(result);
     }
 
     [Fact]
-    public async Task Test_Update_Existing_User()
+    public async Task Test_Update_Existing_User_By_Username()
     {
         await using var context = JungleContextMock.StartNewContext();
         var repository = new UserRepository(context);
         var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
-        var userDto = new UserDto(request, 9);
-        var result = await repository.UpdateUser(userDto);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal("Pedro", user!.Username);
+        Assert.Equal("pedro@teste.com", user.Email);
+        var password = Cryptography.EncryptPassword("1234", user.Salt);
+        Assert.Equal(password, user.Password);
+    }
+
+    [Fact]
+    public async Task Test_Update_Existing_User_By_Email()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
+        var userDto = new UserDto(request);
+        var salt = userDto.Salt;
+        var result = await repository.UpdateUser(userDto, "user9@gmail.com");
         Assert.True(result);
         var user = await context.Users.FindAsync((ulong)9);
         Assert.Equal("Pedro", user!.Username);
         Assert.Equal("pedro@teste.com", user.Email);
-        Assert.Equal("1234", user.Password);
+        var password = Cryptography.EncryptPassword("1234", user.Salt);
+        Assert.Equal(password, user.Password);
     }
 }

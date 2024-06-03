@@ -41,11 +41,12 @@ public class UserRepository(JungleContext context) : IUserRepository
             .SingleOrDefaultAsync();
         return user == null ? null : new UserDto(user);
     }
-    public async Task<bool> UpdateUser(UserDto userDto)
+    public async Task<bool> UpdateUser(UserDto userDto, string user)
     {
-        var user = await context.Users.FindAsync(userDto.Id);
-        if (user == null) return false;
-        user.Update(userDto);
+        var userEntity = await context.Users.Where(userEntity => userEntity.Email == user || userEntity.Username == user)
+            .SingleOrDefaultAsync();
+        if (userEntity == null) return false;
+        userEntity.Update(userDto);
         return true;
     }
 }

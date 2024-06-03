@@ -3,5 +3,5 @@
 namespace Application.UseCases.UpdateUser;
 public interface IUpdateUserUseCase
 {
-    public Task Execute(UserRequest request, ulong userId);
+    public Task Execute(UserRequest request, string user);
 }

@@ -8,14 +8,14 @@ namespace WebApi.Controllers.UpdateUser;
 [Route("[controller]")]
 public class UsersController (IUpdateUserUseCase useCase) : BaseController
 {
-    [HttpPost("{userId}")]
+    [HttpPost("{user}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateUser([FromRoute] ulong userId, [FromBody] UserRequest request)
+    public async Task<IActionResult> UpdateUser([FromRoute] string user, [FromBody] UserRequest request)
     {
         ValidateRequest(request);
-        await useCase.Execute(request, userId);
+        await useCase.Execute(request, user);
 
         return NoContent();
     }

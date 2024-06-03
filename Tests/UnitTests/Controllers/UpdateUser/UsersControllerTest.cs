@@ -26,9 +26,9 @@ public class UsersControllerTest
     {
         ConfigureObjectValidator();
         var successRequest = JsonConvert.DeserializeObject<UserRequest>("{\"Username\":\"name\",\"Email\":\"email@email.com\",\"Password\":\"password\"}");
-        var result = await this._controller.UpdateUser(1,successRequest!);
+        var result = await this._controller.UpdateUser("Pedro",successRequest!);
         Assert.IsType<NoContentResult>(result);
-        this._updateUser.Verify(x => x.Execute(successRequest!, 1), Times.Once);
+        this._updateUser.Verify(x => x.Execute(successRequest!, "Pedro"), Times.Once);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.UpdateUser(1, request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
@@ -62,7 +62,7 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.UpdateUser(1, request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
@@ -84,7 +84,7 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.UpdateUser(1, request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
@@ -111,7 +111,7 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.UpdateUser(1, request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {
@@ -144,7 +144,7 @@ public class UsersControllerTest
         InvalidRequestException? ex = null;
         try
         {
-            await this._controller.UpdateUser(1, request!);
+            await this._controller.UpdateUser("Pedro", request!);
         }
         catch (InvalidRequestException exception)
         {

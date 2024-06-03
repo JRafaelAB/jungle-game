@@ -8,7 +8,7 @@ public class User(string username, string email, string password, string salt, u
     public string Username { get; private set; } = username;
     public string Email { get; private set; } = email;
     public string Password { get; private set; } = password;
-    public string Salt { get; } = salt;
+    public string Salt { get; private set; } = salt;
 
     public User(UserDto userDto) : this(userDto.Username, userDto.Email, userDto.Password, userDto.Salt, userDto.Id) { }
 
@@ -17,6 +17,7 @@ public class User(string username, string email, string password, string salt, u
         this.Username = userDto.Username;
         this.Email = userDto.Email;
         this.Password = userDto.Password;
+        this.Salt = userDto.Salt ?? this.Salt;
     }
     protected bool Equals(User other)
     {
