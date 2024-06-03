@@ -25,19 +25,19 @@ public class GetUserUseCaseTest
     [Fact]
     public async Task Test_Get_Existing_User()
     {
-        var result = await this._useCase.Execute(1);
+        var result = await this._useCase.Execute("ExistingUser");
         Assert.Equal(new GetUserResponse(JungleContextMock.User1Dto), result);
     }
 
     [Fact]
     public async Task Test_Get_Non_Existing_User()
     {
-        var ex = await Assert.ThrowsAsync<UserNotFoundException>(() => this._useCase.Execute(10));
-        Assert.Equal(Messages.UserNotFound, ex.Message);
+        var ex = await Assert.ThrowsAsync<UserNotFoundException>(() => this._useCase.Execute("NonExistingUser"));
+        Assert.Equal(Messages.UserNotFound, ex.ErrorMessages.SingleOrDefault());
     }
     
     private void ConfigureUserRepositoryForExistingUser()
     {
-        this._userRepository.Setup(repo => repo.GetUser(1)).ReturnsAsync(JungleContextMock.User1Dto);
+        this._userRepository.Setup(repo => repo.GetUserByUsernameOrEmail("ExistingUser")).ReturnsAsync(JungleContextMock.User1Dto);
     }
 }

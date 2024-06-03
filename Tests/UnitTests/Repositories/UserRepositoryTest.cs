@@ -85,6 +85,7 @@ public class UserRepositoryTest
         var result = await repository.GetUserByUsernameOrEmail("Bananinha Maligna");
         Assert.Null(result);
     }
+<<<<<<< HEAD
     
     [Fact]
     public async Task Test_Get_Existing_User()
@@ -149,3 +150,6 @@ public class UserRepositoryTest
         Assert.Equal(password, user.Password);
     }
 }
+=======
+}
+>>>>>>> main

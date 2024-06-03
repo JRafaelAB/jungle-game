@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.CreateUser;
 using Domain.Models.Requests;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.CreateUser;
@@ -25,8 +26,7 @@ public class UsersController(ICreateUserUseCase createUserUseCase) : BaseControl
     public async Task<IActionResult> CreateUser([FromBody] UserRequest request)
     {
         ValidateRequest(request);
-        await createUserUseCase.Execute(request);
-        
-        return Created();
+        var username = await createUserUseCase.Execute(request);
+        return Created(new Uri(Request.GetEncodedUrl() + $"/{username}"), null);
     }
 }

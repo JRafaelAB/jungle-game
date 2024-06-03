@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Domain.Exceptions;
 
-[JsonObject(MemberSerialization.OptIn)]
-public class InvalidRequestException(IEnumerable<string> errors) : Exception
-{
-    [JsonProperty]
-    public IList<string> ErrorMessages { get; } = errors.ToList();
-}
+public class InvalidRequestException(IEnumerable<string> errors) : ExceptionBase(errors, StatusCodes.Status400BadRequest);

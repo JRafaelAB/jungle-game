@@ -56,9 +56,9 @@ public class PostUserUseCaseTest
         this._userRepository.Verify(repo => repo.GetUserByEmail("email"), Times.Once);
         this._userRepository.Verify(repo => repo.AddUser(user), Times.Never);
         this._unitOfWork.Verify(x => x.Save(), Times.Never);
-        Assert.Equal(2, ex!.ErrorMessages.Count);
-        Assert.Contains("Email already registered.", ex!.ErrorMessages);
-        Assert.Contains("Username already registered.", ex!.ErrorMessages);
+        Assert.Equal(2, ex.ErrorMessages.Count);
+        Assert.Contains("Email already registered.", ex.ErrorMessages);
+        Assert.Contains("Username already registered.", ex.ErrorMessages);
     }
 
     private void ConfigureUserRepositoryForExistingLogin()

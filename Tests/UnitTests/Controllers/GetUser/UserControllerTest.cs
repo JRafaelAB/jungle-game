@@ -19,7 +19,7 @@ public class UsersControllerTest
     [Fact]
     public async Task Test_Get_Existing_User()
     {
-        var result = await this._controller.GetUser(1);
+        var result = await this._controller.GetUser("ExistingUser");
         Assert.IsType<OkObjectResult>(result);
     }
     

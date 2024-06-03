@@ -15,12 +15,12 @@ public class UsersController(IGetUserUseCase useCase) : BaseController
     /// </summary>
     /// <response code="200">Success.</response>
     /// <response code="404">User Not Found.</response>
-    /// <param name="userId"></param>
-    [HttpGet("{userId}")]
+    /// <param name="user"></param>
+    [HttpGet("{user}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetUser([FromRoute] ulong userId)
+    public async Task<IActionResult> GetUser([FromRoute] string user)
     {
-        return Ok(await useCase.Execute(userId));
+        return Ok(await useCase.Execute(user));
     }
 }

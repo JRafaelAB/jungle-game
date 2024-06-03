@@ -7,11 +7,19 @@ namespace Domain.DTOs
 {
     public class UserDto
     {
+<<<<<<< HEAD
         public ulong? Id { get; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string? Salt { get; }
+=======
+        public ulong? Id { get; init; }
+        public string Username { get; }
+        public string Email { get; }
+        public string Password { get; }
+        public string Salt { get; }
+>>>>>>> main
 
         public UserDto(User user)
         {

@@ -4,5 +4,5 @@ namespace Application.UseCases.GetUser;
 
 public interface IGetUserUseCase
 {
-    Task<GetUserResponse> Execute(ulong userId);
+    Task<GetUserResponse> Execute(string user);
 }

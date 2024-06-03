@@ -1,3 +1,5 @@
-﻿namespace Domain.Exceptions;
+﻿using Microsoft.AspNetCore.Http;
 
-public class UserNotFoundException(string message) : Exception(message);
+namespace Domain.Exceptions;
+
+public class UserNotFoundException(string message) : ExceptionBase(message, StatusCodes.Status404NotFound);
