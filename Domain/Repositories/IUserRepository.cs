@@ -9,4 +9,5 @@ public interface IUserRepository
     public Task<UserDto?> GetUserByEmail(string email);
     public Task<UserDto?> GetUserByUsernameOrEmail(string usernameOrEmail);
     public Task<bool> UpdateUser(UserDto userDto, string user);
+    public Task<bool> DeleteUser(string user);
 }
