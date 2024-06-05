@@ -29,7 +29,7 @@ public class UpdateUserUseCaseTest
     public async Task Test_UseCase_Update_Non_Existing_Id()
     {
         var ex = await Assert.ThrowsAsync<UserNotFoundException>(() => _useCase.Execute(JungleContextMock.UpdateUser11Request,"user11"));
-        Assert.Equal(Messages.UserNotFound, ex.Message);
+        Assert.Equal(Messages.UserNotFound, ex.ErrorMessages.First());
     }
 
     [Fact]
