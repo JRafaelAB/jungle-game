@@ -142,4 +142,13 @@ public class UserRepositoryTest
         Assert.True(result);
         Assert.All(context.Users, item => Assert.DoesNotContain(item.Username, "user3"));
     }
+
+    [Fact]
+    public async Task Test_Delete_Non_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var result = await repository.DeleteUser("user11");
+        Assert.False(result);
+    }
 }

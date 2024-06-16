@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Application.UseCases.CreateUser;
+using Application.UseCases.DeleteUser;
 using Application.UseCases.GetUser;
 using Application.UseCases.LoginUser;
 using Application.UseCases.UpdateUser;
@@ -15,6 +16,7 @@ public static class UseCasesExtensions
         services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
         services.AddScoped<IGetUserUseCase, GetUserUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 
         return services;
     }
