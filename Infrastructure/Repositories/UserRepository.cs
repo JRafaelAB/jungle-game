@@ -42,4 +42,12 @@ public class UserRepository(JungleContext context) : IUserRepository
         userEntity.Update(userDto);
         return true;
     }
+    public async Task<bool> DeleteUser(string user)
+    {
+        var userEntity = await context.Users.Where(userEntity => userEntity.Email == user || userEntity.Username == user)
+            .SingleOrDefaultAsync();
+        if (userEntity == null) return false;
+        context.Users.Remove(userEntity);
+        return true;
+    }
 }

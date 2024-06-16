@@ -85,26 +85,6 @@ public class UserRepositoryTest
         var result = await repository.GetUserByUsernameOrEmail("Bananinha Maligna");
         Assert.Null(result);
     }
-<<<<<<< HEAD
-    
-    [Fact]
-    public async Task Test_Get_Existing_User()
-    {
-        await using var context = JungleContextMock.StartNewContext();
-        var repository = new UserRepository(context);
-        var result = await repository.GetUser(4);
-        Assert.NotNull(result);
-        Assert.Equal(new UserDto(JungleContextMock.User4), result);
-    }
-    
-    [Fact]
-    public async Task Test_Get_Non_Existing_User()
-    {
-        await using var context = JungleContextMock.StartNewContext();
-        var repository = new UserRepository(context);
-        var result = await repository.GetUser(10);
-        Assert.Null(result);
-    }
 
     [Fact]
     public async Task Test_Update_Non_Existing_User()
@@ -125,6 +105,7 @@ public class UserRepositoryTest
         var request = new UserRequest("Pedro", "pedro@teste.com", "1234");
         var userDto = new UserDto(request);
         var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
         Assert.True(result);
         var user = await context.Users.FindAsync((ulong)8);
         Assert.Equal("Pedro", user!.Username);
@@ -142,6 +123,7 @@ public class UserRepositoryTest
         var userDto = new UserDto(request);
         var salt = userDto.Salt;
         var result = await repository.UpdateUser(userDto, "user9@gmail.com");
+        await context.SaveChangesAsync();
         Assert.True(result);
         var user = await context.Users.FindAsync((ulong)9);
         Assert.Equal("Pedro", user!.Username);
@@ -149,7 +131,24 @@ public class UserRepositoryTest
         var password = Cryptography.EncryptPassword("1234", user.Salt);
         Assert.Equal(password, user.Password);
     }
+
+    [Fact]
+    public async Task Test_Delete_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var result = await repository.DeleteUser("user3");
+        await context.SaveChangesAsync();
+        Assert.True(result);
+        Assert.All(context.Users, item => Assert.DoesNotContain(item.Username, "user3"));
+    }
+
+    [Fact]
+    public async Task Test_Delete_Non_Existing_User()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var result = await repository.DeleteUser("user11");
+        Assert.False(result);
+    }
 }
-=======
-}
->>>>>>> main
