@@ -1,5 +1,4 @@
 ﻿using Application.UseCases.DeleteUser;
-using Domain.DTOs;
 using Domain.Exceptions;
 using Domain.Repositories;
 using Domain.Resources;
