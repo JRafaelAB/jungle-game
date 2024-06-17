@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddSQLServer(builder.Configuration)
-    .AddUseCases();
+    .AddUseCases()
+    .AddCronJobs();
 
 Configuration.SetConfiguration(builder.Configuration);
 
