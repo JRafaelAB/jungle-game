@@ -1,13 +1,20 @@
-﻿using Quartz;
+﻿using Domain.Repositories;
+using Domain.Services;
+using Domain.UnitOfWork;
+using Quartz;
 
 namespace Application.Cronjobs;
 
-public class LotteryJob : IJob
+public class LotteryJob(ILotteryService lotteryService, ILotteryResultsRepository repository, IUnitOfWork unitOfWork) : IJob
 {
-    public Task Execute(IJobExecutionContext context)
+    public async Task Execute(IJobExecutionContext context)
     {
         Console.WriteLine($"Executing job at {DateTime.Now} - Trigger Key: {context.Trigger.Key.Name} - Trigger Job Key {context.Trigger.JobKey}");
+
+        var lottery = await lotteryService.GetLotteryResults();
+        await repository.AddLotteryResults(lottery);
+        await unitOfWork.Save();
         
-        return Task.FromResult(true);
+        Console.WriteLine($"Executing job at {DateTime.Now} - Trigger Key: {context.Trigger.Key.Name} - Trigger Job Key {context.Trigger.JobKey}");
     }
 }

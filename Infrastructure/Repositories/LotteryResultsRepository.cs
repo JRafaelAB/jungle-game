@@ -1,14 +1,15 @@
 ﻿using Domain.DTOs;
 using Domain.Entities;
+using Domain.Repositories;
 using Infrastructure.DataAccess.Contexts;
 
 namespace Infrastructure.Repositories;
 
-public class LotteryResultsRepository(JungleContext context)
+public class LotteryResultsRepository(JungleContext context) : ILotteryResultsRepository
 {
-    public async Task AddUser(LotteryDTO lotteryDto)
+    public async Task AddLotteryResults(LotteryDTO lotteryDto)
     {
         LotteryResults lotteryEntity = new(lotteryDto);
         await context.LotteryResults.AddAsync(lotteryEntity);
-    } 
+    }
 }
