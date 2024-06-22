@@ -21,5 +21,6 @@ public class LotteryResultsConfiguration : IEntityTypeConfiguration<LotteryResul
         builder.Property(lottery => lottery.Lottery2).HasMaxLength(100).IsRequired();
         builder.Property(lottery => lottery.Lottery3).HasMaxLength(100).IsRequired();
         builder.Property(lottery => lottery.Lottery4).HasMaxLength(100).IsRequired();
+        builder.Property(lottery => lottery.CreatedAt).IsRequired();
     }
 }

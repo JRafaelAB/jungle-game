@@ -7,6 +7,8 @@ public class LotteryDTO
     public string? Lottery2 { get; set; }
     public string? Lottery3 { get; set; }
     public string? Lottery4 { get; set; }
+    
+    public DateTime CreatedAt { get; } = DateTime.Now.ToUniversalTime();
 
     public LotteryDTO(uint[] numbers, uint numbersPerLottery = 4)
     {

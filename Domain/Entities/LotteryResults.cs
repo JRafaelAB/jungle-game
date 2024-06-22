@@ -3,7 +3,7 @@
 namespace Domain.Entities;
 
 public class LotteryResults(uint numbersPerLottery, string? lottery1, string? lottery2, string? lottery3, string? 
-        lottery4)
+        lottery4, DateTime createdAt)
 {
     public uint Id { get; init; }
     public uint NumbersPerLottery { get; init; } = numbersPerLottery;
@@ -12,6 +12,8 @@ public class LotteryResults(uint numbersPerLottery, string? lottery1, string? lo
     public string? Lottery3 { get; init; } = lottery3;
     public string? Lottery4 { get; init; } = lottery4;
 
+    public DateTime CreatedAt { get; private set; } = createdAt.ToUniversalTime();
+
     public LotteryResults(LotteryDTO dto) : this(dto.NumbersPerLottery, dto.Lottery1, dto.Lottery2, dto.Lottery3,
-        dto.Lottery4) {}
+        dto.Lottery4, dto.CreatedAt) {}
 }
