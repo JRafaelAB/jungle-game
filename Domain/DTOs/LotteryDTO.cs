@@ -24,12 +24,12 @@ public class LotteryDTO
         this.Lottery2 = EnumerableToLottery(numbersPerLottery, filteredNumbers);
         this.Lottery3 = EnumerableToLottery(numbersPerLottery*2, filteredNumbers);
         this.Lottery4 = EnumerableToLottery(numbersPerLottery*3, filteredNumbers);
-        this.Lottery5 = EnumerableToLottery(numbersPerLottery*5, filteredNumbers);
+        this.Lottery5 = EnumerableToLottery(numbersPerLottery*4, filteredNumbers);
 
     }
     private string EnumerableToLottery(uint offset, uint[] numbers)
     {
-        return $"{numbers[0+offset]}-{numbers[0+offset]},{numbers[0+offset]}-{numbers[0+offset]}";
+        return $"{numbers[0+offset]}-{numbers[1+offset]},{numbers[2+offset]}-{numbers[3+offset]}";
     }
 
     public override string ToString()
@@ -40,5 +40,23 @@ public class LotteryDTO
                $"3rd Lottery: {Lottery3?.GetOnlyNumbers()}/n" +
                $"4th Lottery: {Lottery4?.GetOnlyNumbers()}/n" +
                $"5th Lottery: {Lottery5?.GetOnlyNumbers()}";
+    }
+    
+    protected bool Equals(LotteryDTO other)
+    {
+        return NumbersPerLottery == other.NumbersPerLottery && Lottery1 == other.Lottery1 && Lottery2 == other.Lottery2 && Lottery3 == other.Lottery3 && Lottery4 == other.Lottery4 && Lottery5 == other.Lottery5;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((LotteryDTO)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(NumbersPerLottery, Lottery1, Lottery2, Lottery3, Lottery4, Lottery5);
     }
 }

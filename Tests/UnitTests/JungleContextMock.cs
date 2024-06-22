@@ -7,26 +7,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests;
 
-public static class JungleContextMock
+public class JungleContextMock(string databaseName)
 {
-    public static JungleContext StartNewContext()
+    public async Task<JungleContext> StartNewContext()
     {
         var options = new DbContextOptionsBuilder<JungleContext>()
-            .UseInMemoryDatabase(databaseName: "database")
+            .UseInMemoryDatabase(databaseName: databaseName)
             .Options;
         
         var context = new JungleContext(options);
-        context.Database.EnsureDeleted();
-        context.Users.Add(User1);
-        context.Users.Add(User2);
-        context.Users.Add(User3);
-        context.Users.Add(User4);
-        context.Users.Add(User5);
-        context.Users.Add(User6);
-        context.Users.Add(User7);
-        context.Users.Add(User8);
-        context.Users.Add(User9);
-        context.SaveChanges();
+        await context.Database.EnsureDeletedAsync();
+        await context.Users.AddAsync(User1);
+        await context.Users.AddAsync(User2);
+        await context.Users.AddAsync(User3);
+        await context.Users.AddAsync(User4);
+        await context.Users.AddAsync(User5);
+        await context.Users.AddAsync(User6);
+        await context.Users.AddAsync(User7);
+        await context.Users.AddAsync(User8);
+        await context.Users.AddAsync(User9);
+        await context.SaveChangesAsync();
         return context;
     }
 
@@ -49,4 +49,10 @@ public static class JungleContextMock
     public static readonly UserRequest UpdateUser11Request = new("user11", "user11@gmail.com", Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest UpdateUserExistingUsernameRequest = new("user2", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
+
+    public static readonly LotteryDTO Lottery1Dto = new([1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0], 4);
+    public static readonly LotteryResults Lottery1 = new(4,"1-2,3-4", "5-6,7-8", "9-0,1-2", "3-4,5-6", "7-8,9-0", DateTime.Now)
+    {
+        Id = 1
+    };
 }
