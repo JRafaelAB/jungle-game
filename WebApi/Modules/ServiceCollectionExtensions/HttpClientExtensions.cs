@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Domain.Constants;
+using Domain.Services;
 using Infrastructure.Services.Lottery;
 using RestEase.HttpClientFactory;
 
@@ -12,6 +13,7 @@ public static class HttpClientExtensions
     {
         string? baseUrl = configuration.GetConnectionString(ConfigurationConstants.LOTTERY_HTTP_CLIENT);
         services.AddRestEaseClient<ILotteryApi>(baseUrl);
+        services.AddScoped<ILotteryService, LotteryService>();
 
         return services;
     }

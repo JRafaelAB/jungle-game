@@ -23,6 +23,7 @@ internal static class SqlExtensions
             });
         
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ILotteryResultsRepository, LotteryResultsRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;

@@ -15,6 +15,6 @@ public class LotteryJob(ILotteryService lotteryService, ILotteryResultsRepositor
         await repository.AddLotteryResults(lottery);
         await unitOfWork.Save();
         
-        Console.WriteLine($"Executing job at {DateTime.Now} - Trigger Key: {context.Trigger.Key.Name} - Trigger Job Key {context.Trigger.JobKey}");
+        Console.WriteLine(lottery.ToString());
     }
 }

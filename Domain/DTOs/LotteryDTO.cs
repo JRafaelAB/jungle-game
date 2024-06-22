@@ -35,10 +35,10 @@ public class LotteryDTO
     public override string ToString()
     {
         return $"Lottery Results:/n" +
-               $"1st Lottery: {Lottery1?.GetOnlyNumbers()}" +
-               $"2nd Lottery: {Lottery2?.GetOnlyNumbers()}" +
-               $"3rd Lottery: {Lottery3?.GetOnlyNumbers()}" +
-               $"4th Lottery: {Lottery4?.GetOnlyNumbers()}" +
+               $"1st Lottery: {Lottery1?.GetOnlyNumbers()}/n" +
+               $"2nd Lottery: {Lottery2?.GetOnlyNumbers()}/n" +
+               $"3rd Lottery: {Lottery3?.GetOnlyNumbers()}/n" +
+               $"4th Lottery: {Lottery4?.GetOnlyNumbers()}/n" +
                $"5th Lottery: {Lottery5?.GetOnlyNumbers()}";
     }
 }
