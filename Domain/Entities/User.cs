@@ -19,6 +19,7 @@ public class User(string username, string email, string password, string salt, u
         this.Password = userDto.Password;
         this.Salt = userDto.Salt ?? this.Salt;
     }
+    
     protected bool Equals(User other)
     {
         return Username == other.Username && Email == other.Email && Password == other.Password && Salt == other.Salt;
