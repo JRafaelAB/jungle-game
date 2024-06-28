@@ -11,6 +11,7 @@ namespace Domain.DTOs
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public decimal Balance { get; set; }
         public string? Salt { get; }
 
         public UserDto(User user)
