@@ -26,7 +26,7 @@ public class PostUserUseCaseTest
     [Fact]
     public async Task Test_Create_New_User()
     {
-        UserDto user = new("usuario", "email", "10", "10");
+        UserDto user = new("usuario", "email", "10", 0, "10");
 
         await _useCase.Execute(CreateUserUseCaseDataSetup.validUser);
         
@@ -41,7 +41,7 @@ public class PostUserUseCaseTest
     {
         ConfigureUserRepositoryForExistingLogin();
         
-        UserDto user = new("usuario", "email", "10", "10");
+        UserDto user = new("usuario", "email", "10", 0, "10");
         LoginConflictException? ex = null;
         try
         {
@@ -64,8 +64,8 @@ public class PostUserUseCaseTest
     private void ConfigureUserRepositoryForExistingLogin()
     {
         this._userRepository.Setup(repo => repo.GetUserByUsername("usuario")).ReturnsAsync(new UserDto("usuario", 
-            "email", "10", "10"));
+            "email", "10", 0, "10"));
         this._userRepository.Setup(repo => repo.GetUserByEmail("email")).ReturnsAsync(new UserDto("usuario", 
-            "email", "10", "10"));
+            "email", "10", 0, "10"));
     }
 }
