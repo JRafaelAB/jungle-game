@@ -21,6 +21,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(user => user.Email).HasMaxLength(200).IsRequired();
         builder.Property(user => user.Username).HasMaxLength(200).IsRequired();
         builder.Property(user => user.Password).HasMaxLength(300).IsRequired();
+        builder.Property(user => user.Balance).HasColumnType("decimal(20,2)").HasDefaultValue(0).IsRequired();
         builder.Property(user => user.Salt).HasMaxLength(200).IsRequired();
     }
 }
