@@ -11,6 +11,7 @@ namespace Domain.DTOs
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public decimal Balance { get; set; }
         public string? Salt { get; }
 
         public UserDto(User user)
@@ -19,21 +20,26 @@ namespace Domain.DTOs
             this.Username = user.Username;
             this.Email = user.Email;
             this.Password = user.Password;
+            this.Balance = user.Balance;
             this.Salt = user.Salt;
         }
 
-        public UserDto(string username, string email, string password, string salt)
+        public UserDto(string username, string email, string password, decimal balance, string salt)
         {
             this.Username = username;
             this.Email = email;
             this.Password = password;
+            this.Balance = balance;
             this.Salt = salt;
         }
 
         public UserDto(UserRequest request)
         {
             var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
+            var balance = Configuration.GetConfigurationValue<decimal>(ConfigurationConstants.BALANCE);
+            //TODO: Criar a configuração do balance usando o salt como exemplo
             this.Salt = Cryptography.GenerateSalt(size);
+            this.Balance = balance;
             var password = Cryptography.EncryptPassword(request.Password, this.Salt);
             
             this.Username = request.Username;
