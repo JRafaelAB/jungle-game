@@ -12,6 +12,8 @@ public class UsernameValidator : ValidationAttribute
     }
     public override bool IsValid(object? value)
     {
-        return value != null && value.ToString()!.IsValidUsername();
+        if(value != null) return value.ToString()!.IsValidUsername();
+
+        return true;
     }
 }

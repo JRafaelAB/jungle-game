@@ -45,6 +45,10 @@ public class JungleContextMock(string databaseName)
     public static readonly User User9 = new("user9", "user9@gmail.com", Cryptography.EncryptPassword("password", "salt"), 0, "salt");
     public static readonly UserDto NewUser1Dto = new("NewUser1", "NewUser1@gmail.com", "password", 0, "salt");
     public static readonly User NewUser1 = new("NewUser1", "NewUser1@gmail.com", "password", 0, "salt");
+    public static readonly UserUpdateRequest User1Request = new("user1", "user1@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserUpdateRequest UpdateUser11Request = new("user11", "user11@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserUpdateRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
+    public static readonly UserUpdateRequest UpdateUserExistingUsernameRequest = new("user2", "user1@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest User1Request = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest UpdateUser11Request = new("user11", "user11@gmail.com", Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", Cryptography.EncryptPassword("password", "salt"));

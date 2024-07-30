@@ -67,7 +67,7 @@ public class UserRepositoryTest
         var repository = new UserRepository(context);
         var result = await repository.GetUserByUsernameOrEmail(JungleContextMock.User1.Username);
         Assert.Equal(new UserDto(JungleContextMock.User1), result);
-    }
+    }    
     
     [Fact]
     public async Task Test_Get_Existing_User_By_UsernameOrEmail_Using_Email()
@@ -77,7 +77,7 @@ public class UserRepositoryTest
         var result = await repository.GetUserByUsernameOrEmail(JungleContextMock.User1.Email);
         Assert.Equal(new UserDto(JungleContextMock.User1), result);
     }
-    
+
     [Fact]
     public async Task Test_Get_Non_Existing_User_By_UsernameOrEmail()
     {
@@ -132,6 +132,21 @@ public class UserRepositoryTest
         var password = Cryptography.EncryptPassword("1234", user1.Salt);
         Assert.Equal(password, user1.Password);
         await context.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Test_Updating_Only_Username()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserUpdateRequest("Pedro", null, null, null);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal("Pedro", user!.Username);
+
     }
 
     [Fact]

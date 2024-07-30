@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs;
+using Domain.Utils;
 
 namespace Domain.Entities;
 
@@ -11,14 +12,14 @@ public class User(string username, string email, string password, decimal balanc
     public decimal Balance { get; private set; } = balance;
     public string Salt { get; private set; } = salt;
 
-    public User(UserDto userDto) : this(userDto.Username, userDto.Email, userDto.Password, userDto.Balance, userDto.Salt, userDto.Id) { }
+    public User(UserDto userDto) : this(userDto.Username.GetValue(), userDto.Email.GetValue(), userDto.Password.GetValue(), userDto.Balance ?? 0, userDto.Salt.GetValue(), userDto.Id) { }
 
     public void Update(UserDto userDto)
     {
-        this.Username = userDto.Username;
-        this.Email = userDto.Email;
-        this.Password = userDto.Password;
-        this.Balance = userDto.Balance;
+        this.Username = userDto.Username ?? this.Username;
+        this.Email = userDto.Email ?? this.Email;
+        this.Password = userDto.Password ?? this.Password;
+        this.Balance = userDto.Balance ?? this.Balance;
         this.Salt = userDto.Salt ?? this.Salt;
     }
     
