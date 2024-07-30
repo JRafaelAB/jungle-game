@@ -44,8 +44,7 @@ public static class Validation
     public static bool HasAllFieldsNull(this object myObject)
     {
         return myObject.GetType().GetProperties()
-            .Where(pi => pi.PropertyType == typeof(string))
-            .Select(pi => (string)pi.GetValue(myObject))
-            .Any(value => string.IsNullOrEmpty(value));
+            .Select(pi => pi.GetValue(myObject))
+            .All(value => value == null);
     }
 }
