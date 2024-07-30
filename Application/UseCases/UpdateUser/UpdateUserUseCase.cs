@@ -9,26 +9,34 @@ namespace Application.UseCases.UpdateUser;
 
 public class UpdateUserUseCase(IUserRepository repository, IUnitOfWork unitOfWork) : IUpdateUserUseCase
 {
-    public async Task Execute(UserRequest request, string user)
+    public async Task Execute(UserUpdateRequest request, string user)
     {
         await ValidateExistingUser(request, user);
+
+        await Save(repository, unitOfWork, request, user);        
+    }
+
+    static async Task Save(IUserRepository repository, IUnitOfWork unitOfWork, UserUpdateRequest request, string user)
+    {
         if (!await repository.UpdateUser(new UserDto(request), user))
         {
             throw new UserNotFoundException(Messages.UserNotFound);
         }
         await unitOfWork.Save();
     }
-    private async Task ValidateExistingUser(UserRequest request, string user)
+    private async Task ValidateExistingUser(UserUpdateRequest request, string user)
     {
         var isValid = true;
         var errors = new List<string>();
 
-        if (IsExistingUser(await repository.GetUserByUsername(request.Username), user))
+        
+
+        if (request.Username != null && IsExistingUser(await repository.GetUserByUsername(request.Username), user))
         {
             isValid = false;
             errors.Add(Messages.ConflictUsername);
         }
-        if (IsExistingUser(await repository.GetUserByEmail(request.Email), user))
+        if (request.Email != null && IsExistingUser(await repository.GetUserByEmail(request.Email), user))
         {
             isValid = false;
             errors.Add(Messages.ConflictEmail);

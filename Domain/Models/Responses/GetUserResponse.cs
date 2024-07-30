@@ -5,7 +5,7 @@ namespace Domain.Models.Responses;
 public class GetUserResponse(UserDto user)
 {
     public ulong? Id { get; } = user.Id;
-    public string Username { get; } = user.Username;
+    public string? Username { get; } = user.Username;
     
 
     protected bool Equals(GetUserResponse other)

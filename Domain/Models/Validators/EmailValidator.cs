@@ -12,6 +12,8 @@ public class EmailValidator : ValidationAttribute
     }
     public override bool IsValid(object? value)
     {
-        return value != null && value.ToString()!.IsValidEmail();
+        if(value != null)  return value.ToString()!.IsValidEmail();
+
+        return true;
     }
 }
