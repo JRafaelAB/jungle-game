@@ -26,11 +26,11 @@ public static class Validation
 
     public static bool IsValidEmail(this string argument)
     {
-        return Regex.IsMatch(argument, RegexConstants.EMAIL_REGEX, RegexOptions.IgnoreCase);
+        return Regex.IsMatch(argument, RegexConstants.EmailRegex, RegexOptions.IgnoreCase);
     }
 
     public static bool IsValidUsername(this string argument)
     {
-        return Regex.IsMatch(argument, RegexConstants.USERNAME_REGEX);
+        return Regex.IsMatch(argument, RegexConstants.UsernameRegex);
     }
 }

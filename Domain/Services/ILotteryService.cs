@@ -4,5 +4,5 @@ namespace Domain.Services;
 
 public interface ILotteryService
 {
-    Task<LotteryDTO> GetLotteryResults();
+    Task<LotteryDto> GetLotteryResults();
 }

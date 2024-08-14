@@ -15,7 +15,7 @@ public class LotteryResults(uint numbersPerLottery, string? lottery1, string? lo
 
     public DateTime CreatedAt { get; private set; } = createdAt.ToUniversalTime();
 
-    public LotteryResults(LotteryDTO dto) : this(dto.NumbersPerLottery, dto.Lottery1, dto.Lottery2, dto.Lottery3,
+    public LotteryResults(LotteryDto dto) : this(dto.NumbersPerLottery, dto.Lottery1, dto.Lottery2, dto.Lottery3,
         dto.Lottery4, dto.Lottery5, dto.CreatedAt) {}
     
     

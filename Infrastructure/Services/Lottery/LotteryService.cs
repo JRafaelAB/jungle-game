@@ -15,10 +15,10 @@ public class LotteryService : ILotteryService
    public LotteryService(ILotteryApi lotteryApi)
    {
       this._lotteryApi = lotteryApi;
-      this._lotteryApi.ApiKey = Configuration.GetConfigurationValue<string>(ConfigurationConstants.LOTTERY_API_KEY);
+      this._lotteryApi.ApiKey = Configuration.GetConfigurationValue<string>(ConfigurationConstants.LotteryApiKey);
    }
    
-   public async Task<LotteryDTO> GetLotteryResults()
+   public async Task<LotteryDto> GetLotteryResults()
    {
       var response = await this._lotteryApi.FetchLotteryNumbersAsync();
 
@@ -28,6 +28,6 @@ public class LotteryService : ILotteryService
 
       if (lotteryResponse?.Data == null) throw new ArgumentException(nameof(lotteryResponse));
 
-      return new LotteryDTO(lotteryResponse.Data);
+      return new LotteryDto(lotteryResponse.Data);
    }
 }

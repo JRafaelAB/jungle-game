@@ -2,9 +2,9 @@
 
 namespace Domain.Entities;
 
-public class User(string username, string email, string password, string salt, ulong? Id = null)
+public class User(string username, string email, string password, string salt, ulong? id = null)
 {
-    public ulong? Id { get; } = Id;
+    public ulong? Id { get; } = id;
     public string Username { get; private set; } = username;
     public string Email { get; private set; } = email;
     public string Password { get; private set; } = password;

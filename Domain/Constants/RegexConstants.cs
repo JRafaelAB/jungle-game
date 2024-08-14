@@ -2,7 +2,7 @@
 
 public static class RegexConstants
 {
-    public const string EMAIL_REGEX
+    public const string EmailRegex
         = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
-    public const string USERNAME_REGEX = @"^((?![@""'\\\/;:\s|()\[\]{}]).)*$";
+    public const string UsernameRegex = @"^((?![@""'\\\/;:\s|()\[\]{}]).)*$";
 }

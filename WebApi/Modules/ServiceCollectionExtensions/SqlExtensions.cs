@@ -14,7 +14,7 @@ internal static class SqlExtensions
 {
     public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString(ConfigurationConstants.JUNGLE_DB_CONNECTION_STRING);
+        var connectionString = configuration.GetConnectionString(ConfigurationConstants.JungleDbConnectionString);
         
         services.AddDbContext<JungleContext>(
             options =>

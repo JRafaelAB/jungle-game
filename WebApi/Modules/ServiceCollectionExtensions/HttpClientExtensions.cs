@@ -11,7 +11,7 @@ public static class HttpClientExtensions
 {
     public static IServiceCollection AddHttpClients(this IServiceCollection services, IConfiguration configuration)
     {
-        string? baseUrl = configuration.GetValue<string>(ConfigurationConstants.LOTTERY_HTTP_CLIENT);
+        string? baseUrl = configuration.GetValue<string>(ConfigurationConstants.LotteryHttpClient);
         services.AddRestEaseClient<ILotteryApi>(baseUrl);
         services.AddScoped<ILotteryService, LotteryService>();
 

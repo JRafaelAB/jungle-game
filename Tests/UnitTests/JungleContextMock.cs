@@ -50,7 +50,7 @@ public class JungleContextMock(string databaseName)
     public static readonly UserRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserRequest UpdateUserExistingUsernameRequest = new("user2", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"));
 
-    public static readonly LotteryDTO Lottery1Dto = new([1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0], 4);
+    public static readonly LotteryDto Lottery1Dto = new([1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0], 4);
     public static readonly LotteryResults Lottery1 = new(4,"1-2,3-4", "5-6,7-8", "9-0,1-2", "3-4,5-6", "7-8,9-0", DateTime.Now)
     {
         Id = 1

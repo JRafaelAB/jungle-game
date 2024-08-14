@@ -2,7 +2,7 @@
 
 namespace Domain.DTOs;
 
-public class LotteryDTO
+public class LotteryDto
 {
     public uint NumbersPerLottery { get; }
     public string? Lottery1 { get; }
@@ -13,7 +13,7 @@ public class LotteryDTO
     
     public DateTime CreatedAt { get; } = DateTime.Now.ToUniversalTime();
 
-    public LotteryDTO(uint[] numbers, uint numbersPerLottery = 4)
+    public LotteryDto(uint[] numbers, uint numbersPerLottery = 4)
     {
         var filteredNumbers = numbers.Select(number => number % 10).ToArray();
         this.NumbersPerLottery = numbersPerLottery;
@@ -42,7 +42,7 @@ public class LotteryDTO
                $"5th Lottery: {Lottery5?.GetOnlyNumbers()}";
     }
     
-    protected bool Equals(LotteryDTO other)
+    protected bool Equals(LotteryDto other)
     {
         return NumbersPerLottery == other.NumbersPerLottery && Lottery1 == other.Lottery1 && Lottery2 == other.Lottery2 && Lottery3 == other.Lottery3 && Lottery4 == other.Lottery4 && Lottery5 == other.Lottery5;
     }
@@ -52,7 +52,7 @@ public class LotteryDTO
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((LotteryDTO)obj);
+        return Equals((LotteryDto)obj);
     }
 
     public override int GetHashCode()

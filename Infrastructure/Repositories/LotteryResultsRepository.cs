@@ -7,7 +7,7 @@ namespace Infrastructure.Repositories;
 
 public class LotteryResultsRepository(JungleContext context) : ILotteryResultsRepository
 {
-    public async Task AddLotteryResults(LotteryDTO lotteryDto)
+    public async Task AddLotteryResults(LotteryDto lotteryDto)
     {
         LotteryResults lotteryEntity = new(lotteryDto);
         await context.LotteryResults.AddAsync(lotteryEntity);
