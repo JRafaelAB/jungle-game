@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddSQLServer(builder.Configuration)
+    .AddSqlServer(builder.Configuration)
     .AddUseCases()
     .AddCronJobs()
     .AddHttpClients(builder.Configuration);

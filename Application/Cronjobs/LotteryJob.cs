@@ -9,7 +9,7 @@ public class LotteryJob(ILotteryService lotteryService, ILotteryResultsRepositor
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        Console.WriteLine($"Executing job at {DateTime.Now} - Trigger Key: {context.Trigger.Key.Name} - Trigger Job Key {context.Trigger.JobKey}");
+        Console.WriteLine($@"Executing job at {DateTime.Now} - Trigger Key: {context.Trigger.Key.Name} - Trigger Job Key {context.Trigger.JobKey}");
 
         var lottery = await lotteryService.GetLotteryResults();
         await repository.AddLotteryResults(lottery);

@@ -5,7 +5,7 @@ namespace Infrastructure.Services.Lottery;
 public interface ILotteryApi
 {
     [Header("x-api-key")]
-    string? ApiKey { set; }
+    string? ApiKey { get; set; }
     
     [Get]
     Task<HttpResponseMessage> FetchLotteryNumbersAsync([Query("length")] int length=20, [Query("type")] string type="uint8");

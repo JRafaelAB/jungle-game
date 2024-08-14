@@ -24,7 +24,7 @@ public class LotteryService : ILotteryService
 
       if (!response.IsSuccessStatusCode) throw new SystemException(response.Content.ToString());
 
-      var lotteryResponse = JsonConvert.DeserializeObject<GetLotteryResponse>(response.Content.ToStringOrEmpty());
+      var lotteryResponse = JsonConvert.DeserializeObject<GetLotteryResponse>(await response.Content.ReadAsStringAsync());
 
       if (lotteryResponse?.Data == null) throw new ArgumentException(nameof(lotteryResponse));
 
