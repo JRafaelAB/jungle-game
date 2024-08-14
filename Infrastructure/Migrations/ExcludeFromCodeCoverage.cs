@@ -8,3 +8,6 @@ public partial class DatabaseSetup;
 
 [ExcludeFromCodeCoverage]
 public partial class JungleContextModelSnapshot;
+
+[ExcludeFromCodeCoverage]
+public partial class AddBalance;
