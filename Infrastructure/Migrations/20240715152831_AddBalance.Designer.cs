@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(JungleContext))]
-    [Migration("20240715152831_addbalance")]
-    partial class addbalance
+    [Migration("20240715152831_AddBalance")]
+    partial class AddBalance
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
