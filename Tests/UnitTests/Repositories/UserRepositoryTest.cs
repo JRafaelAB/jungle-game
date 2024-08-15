@@ -67,7 +67,7 @@ public class UserRepositoryTest
         var repository = new UserRepository(context);
         var result = await repository.GetUserByUsernameOrEmail(JungleContextMock.User1.Username);
         Assert.Equal(new UserDto(JungleContextMock.User1), result);
-    }
+    }    
     
     [Fact]
     public async Task Test_Get_Existing_User_By_UsernameOrEmail_Using_Email()
@@ -77,7 +77,7 @@ public class UserRepositoryTest
         var result = await repository.GetUserByUsernameOrEmail(JungleContextMock.User1.Email);
         Assert.Equal(new UserDto(JungleContextMock.User1), result);
     }
-    
+
     [Fact]
     public async Task Test_Get_Non_Existing_User_By_UsernameOrEmail()
     {

@@ -56,6 +56,8 @@ public class UpdateUserUseCaseTest
         Assert.Equal(Messages.ConflictUsername, ex.ErrorMessages.First());
     }
 
+
+
     private void ConfigureUserRepositoryForExistingLogin()
     {
         this._userRepository.Setup(repo => repo.UpdateUser(It.IsAny<UserDto>(), "user1")).

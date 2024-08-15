@@ -25,7 +25,7 @@ public class UsersControllerTest
     public async Task Test_PostUser_Valid_Request()
     {
         ConfigureObjectValidator();
-        var successRequest = JsonConvert.DeserializeObject<UserRequest>("{\"Username\":\"name\",\"Email\":\"email@email.com\",\"Password\":\"password\"}");
+        var successRequest = JsonConvert.DeserializeObject<UserUpdateRequest>("{\"Username\":\"name\",\"Email\":\"email@email.com\",\"Password\":\"password\",\"Balance\":\"10\"}");
         var result = await this._controller.UpdateUser("Pedro",successRequest!);
         Assert.IsType<NoContentResult>(result);
         this._updateUser.Verify(x => x.Execute(successRequest!, "Pedro"), Times.Once);
@@ -35,30 +35,19 @@ public class UsersControllerTest
     public async Task Test_PostUser_Invalid_Request_Empty_Fields()
     {
         ConfigureObjectValidator();
-        var request = JsonConvert.DeserializeObject<UserRequest>("{\"Username\":\" \",\"Email\":\" \",\"Password\":\" \"}");
-        InvalidRequestException? ex = null;
-        try
-        {
-            await this._controller.UpdateUser("Pedro", request!);
-        }
-        catch (InvalidRequestException exception)
-        {
-            ex = exception;
-        }
+        var request = JsonConvert.DeserializeObject<UserUpdateRequest>("{\"Username\":\" \",\"Email\":\" \",\"Password\":\" \",\"Balance\":\"\"}");
+        
 
-        Assert.NotNull(ex);
-        var errors = ex!.ErrorMessages;
-        Assert.Equal(3, errors.Count);
-        Assert.Contains("The Username field is required.", errors);
-        Assert.Contains("The Password field is required.", errors);
-        Assert.Contains("The Email field is required.", errors);
+        var result = await this._controller.UpdateUser("Pedro", request!);
+
+        Assert.IsType<BadRequestResult>(result);
     }
 
     [Fact]
     public async Task Test_PostUser_Invalid_Request_Fields_Out_Of_Max_Range()
     {
         ConfigureObjectValidator();
-        var request = JsonConvert.DeserializeObject<UserRequest>("{\"Username\":\"becauseofyouIneverhsjhdjdshjsdds\",\"Email\":\"email@email.com\",\"Password\":\"becauseofyouIneverhsjhdjdshjsdds\"}");
+        var request = JsonConvert.DeserializeObject<UserUpdateRequest>("{\"Username\":\"becauseofyouIneverhsjhdjdshjsdds\",\"Email\":\"email@email.com\",\"Password\":\"becauseofyouIneverhsjhdjdshjsdds\",\"Balance\": \"10\"}");
         InvalidRequestException? ex = null;
         try
         {
@@ -80,23 +69,12 @@ public class UsersControllerTest
     public async Task Test_PostUser_Invalid_Request_Missing_Fields()
     {
         ConfigureObjectValidator();
-        var request = JsonConvert.DeserializeObject<UserRequest>("{}");
-        InvalidRequestException? ex = null;
-        try
-        {
-            await this._controller.UpdateUser("Pedro", request!);
-        }
-        catch (InvalidRequestException exception)
-        {
-            ex = exception;
-        }
+        var request = JsonConvert.DeserializeObject<UserUpdateRequest>("{}");
+        
+        var result = await this._controller.UpdateUser("Pedro", request!);
 
-        Assert.NotNull(ex);
-        var errors = ex!.ErrorMessages;
-        Assert.Equal(3, errors.Count);
-        Assert.Contains("The Username field is required.", errors);
-        Assert.Contains("The Password field is required.", errors);
-        Assert.Contains("The Email field is required.", errors);
+
+        Assert.IsType<BadRequestResult>(result);
     }
 
     [Theory]
@@ -107,7 +85,7 @@ public class UsersControllerTest
     public async Task Test_PostUser_Invalid_Request_Invalid_Email_Format(string? requestModel)
     {
         ConfigureObjectValidator();
-        var request = JsonConvert.DeserializeObject<UserRequest>(requestModel!);
+        var request = JsonConvert.DeserializeObject<UserUpdateRequest>(requestModel!);
         InvalidRequestException? ex = null;
         try
         {
@@ -140,7 +118,7 @@ public class UsersControllerTest
     public async Task Test_PostUser_Invalid_Request_Invalid_Username_Format(string? requestModel)
     {
         ConfigureObjectValidator();
-        var request = JsonConvert.DeserializeObject<UserRequest>(requestModel!);
+        var request = JsonConvert.DeserializeObject<UserUpdateRequest>(requestModel!);
         InvalidRequestException? ex = null;
         try
         {

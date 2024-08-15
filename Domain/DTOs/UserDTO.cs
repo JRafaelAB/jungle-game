@@ -8,10 +8,10 @@ namespace Domain.DTOs
     public class UserDto
     {
         public ulong? Id { get; init; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public decimal Balance { get; set; }
+        public string? Username { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public decimal? Balance { get; set; }
         public string? Salt { get; }
 
         public UserDto(User user)
@@ -44,6 +44,22 @@ namespace Domain.DTOs
             this.Email = request.Email;
             this.Password = password;
             this.Balance = balance;
+        }
+
+        public UserDto(UserUpdateRequest request)
+        {
+            if (request.Password != null)
+            {
+                var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.UserSaltSize);
+                this.Salt = Cryptography.GenerateSalt(size);
+                var password = Cryptography.EncryptPassword(request.Password, this.Salt);
+
+                this.Password = password;
+            }
+
+            this.Balance = request.Balance??this.Balance;
+            this.Username = request.Username??this.Username!;
+            this.Email = request.Email ?? this.Email!;
         }
 
         public bool ValidatePassword(string password)
