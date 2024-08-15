@@ -193,6 +193,64 @@ public class UserRepositoryTest
     }
 
     [Fact]
+    public async Task Test_Updating_Only_Username()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserUpdateRequest("Pedro", null, null, null);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal("Pedro", user!.Username);
+    } 
+
+    [Fact]
+    public async Task Test_Updating_Only_Email()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserUpdateRequest(null, "pedro@teste.com", null, null);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal("pedro@teste.com", user!.Email);
+    }
+    
+    [Fact]
+    public async Task Test_Updating_Only_Balance()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserUpdateRequest(null, null, 20, null);
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal(20, user!.Balance);
+    }
+    
+    [Fact]
+    public async Task Test_Updating_Only_Password()
+    {
+        await using var context = JungleContextMock.StartNewContext();
+        var repository = new UserRepository(context);
+        var request = new UserUpdateRequest(null, null, null, "jonasgay");
+        var userDto = new UserDto(request);
+        var result = await repository.UpdateUser(userDto, "user8");
+        await context.SaveChangesAsync();
+        var sal = context.Users.Where(u => u.Username == "user8").Select(p => p.Salt).SingleOrDefault();
+        var passwordWithSalt = Cryptography.EncryptPassword("jonasgay", sal!);
+        Assert.True(result);
+        var user = await context.Users.FindAsync((ulong)8);
+        Assert.Equal(passwordWithSalt, user!.Password);
+    }
+
+    [Fact]
     public async Task Test_Delete_Existing_User()
     {
         await using var context = await contextMock.StartNewContext();
