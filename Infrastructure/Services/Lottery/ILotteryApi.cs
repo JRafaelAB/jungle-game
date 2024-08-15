@@ -7,6 +7,6 @@ public interface ILotteryApi
     [Header("x-api-key")]
     string? ApiKey { get; set; }
     
-    [Get]
-    Task<HttpResponseMessage> FetchLotteryNumbersAsync([Query("length")] int length=20, [Query("type")] string type="uint8");
+    [Get("?length=20&type=uint8")]
+    Task<HttpResponseMessage> FetchLotteryNumbersAsync();
 }

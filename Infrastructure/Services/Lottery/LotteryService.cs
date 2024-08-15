@@ -26,7 +26,7 @@ public class LotteryService : ILotteryService
 
       var lotteryResponse = JsonConvert.DeserializeObject<GetLotteryResponse>(await response.Content.ReadAsStringAsync());
 
-      if (lotteryResponse?.Data == null) throw new ArgumentException(nameof(lotteryResponse));
+      if (lotteryResponse?.Data == null || lotteryResponse.Data.Length == 0) throw new ArgumentException(nameof(lotteryResponse));
 
       return new LotteryDto(lotteryResponse.Data);
    }
