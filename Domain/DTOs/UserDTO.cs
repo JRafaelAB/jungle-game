@@ -7,10 +7,11 @@ namespace Domain.DTOs
 {
     public class UserDto
     {
-        public ulong? Id { get; }
-        public string Username { get; }
-        public string Email { get; }
-        public string Password { get; }
+        public ulong? Id { get; init; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public decimal Balance { get; set; }
         public string? Salt { get; }
 
         public UserDto(User user)
@@ -19,19 +20,22 @@ namespace Domain.DTOs
             this.Username = user.Username;
             this.Email = user.Email;
             this.Password = user.Password;
+            this.Balance = user.Balance;
             this.Salt = user.Salt;
         }
 
-        public UserDto(string username, string email, string password, string salt)
+        public UserDto(string username, string email, string password, decimal balance, string salt)
         {
             this.Username = username;
             this.Email = email;
             this.Password = password;
+            this.Balance = balance;
             this.Salt = salt;
         }
 
         public UserDto(UserRequest request)
         {
+            var balance = Configuration.GetConfigurationValue<decimal>(ConfigurationConstants.BALANCE);
             var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.UserSaltSize);
             this.Salt = Cryptography.GenerateSalt(size);
             var password = Cryptography.EncryptPassword(request.Password, this.Salt);
@@ -39,6 +43,7 @@ namespace Domain.DTOs
             this.Username = request.Username;
             this.Email = request.Email;
             this.Password = password;
+            this.Balance = balance;
         }
 
         public bool ValidatePassword(string password)

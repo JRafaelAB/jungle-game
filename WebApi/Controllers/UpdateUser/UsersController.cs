@@ -8,7 +8,7 @@ namespace WebApi.Controllers.UpdateUser;
 [Route("[controller]")]
 public class UsersController (IUpdateUserUseCase useCase) : BaseController
 {
-    [HttpPost("{user}")]
+    [HttpPut("{user}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

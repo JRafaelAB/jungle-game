@@ -38,4 +38,3 @@ public class CreateUserUseCase(IUserRepository repository, IUnitOfWork unitOfWor
         throw new LoginConflictException(errors);
     }
 }
-

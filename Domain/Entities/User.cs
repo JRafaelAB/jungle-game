@@ -2,21 +2,23 @@
 
 namespace Domain.Entities;
 
-public class User(string username, string email, string password, string salt, ulong? id = null)
+public class User(string username, string email, string password, decimal balance, string salt, ulong? id = null)
 {
     public ulong? Id { get; } = id;
     public string Username { get; private set; } = username;
     public string Email { get; private set; } = email;
     public string Password { get; private set; } = password;
+    public decimal Balance { get; private set; } = balance;
     public string Salt { get; private set; } = salt;
 
-    public User(UserDto userDto) : this(userDto.Username, userDto.Email, userDto.Password, userDto.Salt, userDto.Id) { }
+    public User(UserDto userDto) : this(userDto.Username, userDto.Email, userDto.Password, userDto.Balance, userDto.Salt, userDto.Id) { }
 
     public void Update(UserDto userDto)
     {
         this.Username = userDto.Username;
         this.Email = userDto.Email;
         this.Password = userDto.Password;
+        this.Balance = userDto.Balance;
         this.Salt = userDto.Salt ?? this.Salt;
     }
     
