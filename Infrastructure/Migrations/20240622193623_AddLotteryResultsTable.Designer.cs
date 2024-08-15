@@ -4,6 +4,7 @@ using Infrastructure.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(JungleContext))]
-    partial class JungleContextModelSnapshot : ModelSnapshot
+    [Migration("20240622193623_AddLotteryResultsTable")]
+    partial class AddLotteryResultsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,11 +76,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("decimal(20,0)");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("Id"));
-
-                    b.Property<decimal>("Balance")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,2)")
-                        .HasDefaultValue(0m);
 
                     b.Property<string>("Email")
                         .IsRequired()

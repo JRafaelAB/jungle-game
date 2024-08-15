@@ -35,8 +35,8 @@ namespace Domain.DTOs
 
         public UserDto(UserRequest request)
         {
-            var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
             var balance = Configuration.GetConfigurationValue<decimal>(ConfigurationConstants.BALANCE);
+            var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.UserSaltSize);
             this.Salt = Cryptography.GenerateSalt(size);
             var password = Cryptography.EncryptPassword(request.Password, this.Salt);
             

@@ -12,8 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddSQLServer(builder.Configuration)
-    .AddUseCases();
+    .AddSqlServer(builder.Configuration)
+    .AddUseCases()
+    .AddCronJobs()
+    .AddHttpClients(builder.Configuration);
 
 Configuration.SetConfiguration(builder.Configuration);
 

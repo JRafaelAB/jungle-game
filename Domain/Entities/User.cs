@@ -2,9 +2,9 @@
 
 namespace Domain.Entities;
 
-public class User(string username, string email, string password, decimal balance, string salt, ulong? Id = null)
+public class User(string username, string email, string password, decimal balance, string salt, ulong? id = null)
 {
-    public ulong? Id { get; } = Id;
+    public ulong? Id { get; } = id;
     public string Username { get; private set; } = username;
     public string Email { get; private set; } = email;
     public string Password { get; private set; } = password;
@@ -21,6 +21,7 @@ public class User(string username, string email, string password, decimal balanc
         this.Balance = userDto.Balance;
         this.Salt = userDto.Salt ?? this.Salt;
     }
+    
     protected bool Equals(User other)
     {
         return Username == other.Username && Email == other.Email && Password == other.Password && Salt == other.Salt;

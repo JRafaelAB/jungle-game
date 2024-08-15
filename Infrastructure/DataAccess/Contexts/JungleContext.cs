@@ -8,8 +8,8 @@ namespace Infrastructure.DataAccess.Contexts;
 [ExcludeFromCodeCoverage]
 public class JungleContext : DbContext
 {
-
     public virtual DbSet<User> Users { get; init; } = null!;
+    public virtual DbSet<LotteryResults> LotteryResults { get; init; } = null!;
     
     public JungleContext()
     {
