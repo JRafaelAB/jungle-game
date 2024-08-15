@@ -50,7 +50,7 @@ namespace Domain.DTOs
         {
             if (request.Password != null)
             {
-                var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
+                var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.UserSaltSize);
                 this.Salt = Cryptography.GenerateSalt(size);
                 var password = Cryptography.EncryptPassword(request.Password, this.Salt);
 
