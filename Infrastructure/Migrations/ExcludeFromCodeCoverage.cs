@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-// ReSharper disable UnusedType.Global
 
 namespace Infrastructure.Migrations;
 
@@ -13,4 +12,7 @@ public partial class AddLotteryResultsTable;
 public partial class JungleContextModelSnapshot;
 
 [ExcludeFromCodeCoverage]
-public partial class JungleContextModelSnapshot;
+public partial class AddBalance;
+
+[ExcludeFromCodeCoverage]
+public partial class AddBetsTable;
