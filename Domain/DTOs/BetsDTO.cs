@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Extensions;
 using Domain.Models.Requests;
 using static Domain.Constants.Enums;
 
@@ -29,7 +30,7 @@ public class BetsDto(ulong userId, DateTime date, decimal value, BetTypes type, 
                Date == dto.Date &&
                Value == dto.Value &&
                Type == dto.Type &&
-               EqualityComparer<uint[]>.Default.Equals(Data, dto.Data) &&
+               Data.EqualsTo(dto.Data) &&
                LotteryNumber == dto.LotteryNumber;
     }
 

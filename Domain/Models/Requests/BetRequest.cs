@@ -1,4 +1,5 @@
-﻿using Domain.Resources;
+﻿using Domain.Extensions;
+using Domain.Resources;
 using System.ComponentModel.DataAnnotations;
 using static Domain.Constants.Enums;
 
@@ -75,5 +76,21 @@ public class BetRequest (ulong UserId, decimal value, BetTypes type, uint[] data
                 return false;
         }
         return true;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is BetRequest request &&
+               UserId == request.UserId &&
+               Date == request.Date &&
+               Value == request.Value &&
+               Type == request.Type &&
+               Data.EqualsTo(request.Data) &&
+               LotteryNumber == request.LotteryNumber;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(UserId, Date, Value, Type, Data, LotteryNumber);
     }
 }
