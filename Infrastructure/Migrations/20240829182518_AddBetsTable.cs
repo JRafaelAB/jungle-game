@@ -35,6 +35,25 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LotteryResults",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumbersPerLottery = table.Column<long>(type: "bigint", nullable: false),
+                    Lottery1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Lottery2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Lottery3 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Lottery4 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Lottery5 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LotteryResults", x => x.Id);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bets_UserId",
                 table: "Bets",
@@ -46,6 +65,9 @@ namespace Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Bets");
+
+            migrationBuilder.DropTable(
+                name: "LotteryResults");
         }
     }
 }

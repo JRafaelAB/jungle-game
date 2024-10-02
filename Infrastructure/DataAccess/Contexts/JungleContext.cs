@@ -10,6 +10,7 @@ public class JungleContext : DbContext
 {
     public virtual DbSet<User> Users { get; init; } = null!;
     public virtual DbSet<LotteryResults> LotteryResults { get; init; } = null!;
+    public virtual DbSet<Bets> Bets { get; init; } = null!;
     
     public JungleContext()
     {

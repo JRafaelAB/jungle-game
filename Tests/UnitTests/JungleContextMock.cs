@@ -14,7 +14,7 @@ public class JungleContextMock(string databaseName)
         var options = new DbContextOptionsBuilder<JungleContext>()
             .UseInMemoryDatabase(databaseName: databaseName)
             .Options;
-        
+
         var context = new JungleContext(options);
         await context.Database.EnsureDeletedAsync();
         await context.Users.AddAsync(User1);
@@ -30,8 +30,8 @@ public class JungleContextMock(string databaseName)
         return context;
     }
 
-    public static readonly User User1 = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"), 0,"salt");
-    public static readonly UserDto User1Dto = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", 
+    public static readonly User User1 = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password", "salt"), 0, "salt");
+    public static readonly UserDto User1Dto = new("user1", "user1@gmail.com", Cryptography.EncryptPassword("password",
         "salt"), 0, "salt");
     public static readonly UserDto User2Dto = new("user2", "user2@gmail.com", Cryptography.EncryptPassword("password",
         "salt"), 0, "salt");
@@ -49,6 +49,8 @@ public class JungleContextMock(string databaseName)
     public static readonly UserUpdateRequest UpdateUser11Request = new("user11", "user11@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserUpdateRequest UpdateUserExistingEmailRequest = new("user1", "user2@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
     public static readonly UserUpdateRequest UpdateUserExistingUsernameRequest = new("user2", "user1@gmail.com", 0, Cryptography.EncryptPassword("password", "salt"));
+    public static readonly BetsDto BetUser1Dto = new(1, new DateTime(2024, 10, 06), 10, Domain.Constants.Enums.BetTypes.Duke, [1, 2, 3], Domain.Constants.Enums.Lotteries.Lottery1, 1);
+    public static readonly Bets Bet1 = new(1, new DateTime(2024, 10, 06), 10, Domain.Constants.Enums.BetTypes.Duke, [1, 2, 3], Domain.Constants.Enums.Lotteries.Lottery1, 1);
 
     public static readonly LotteryDto Lottery1Dto = new([1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0], 4);
     public static readonly LotteryResults Lottery1 = new(4,"1-2,3-4", "5-6,7-8", "9-0,1-2", "3-4,5-6", "7-8,9-0", DateTime.Now)

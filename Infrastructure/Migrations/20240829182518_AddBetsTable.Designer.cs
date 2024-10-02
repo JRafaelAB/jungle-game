@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(JungleContext))]
-    [Migration("20240826200700_AddBetsTable")]
+    [Migration("20240829182518_AddBetsTable")]
     partial class AddBetsTable
     {
         /// <inheritdoc />
