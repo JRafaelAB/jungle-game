@@ -17,7 +17,7 @@ public sealed class BetsConfiguration : IEntityTypeConfiguration<Bets>
 
         builder.HasKey(bet => bet.Id);
         builder.Property(bet => bet.UserId);
-        builder.HasOne<User>().WithMany().HasForeignKey(bet => bet.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(bet => bet.UserId).HasPrincipalKey(user => user.Id);
         builder.HasIndex(bet => bet.UserId);
         builder.Property(bet => bet.Date).IsRequired();
         builder.Property(bet => bet.Value).HasColumnType("decimal(20,2)").IsRequired();

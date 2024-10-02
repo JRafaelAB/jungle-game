@@ -4,45 +4,22 @@ using static Domain.Constants.Enums;
 
 namespace Domain.DTOs;
 
-public class BetsDto
+public class BetsDto(ulong userId, DateTime date, decimal value, BetTypes type, uint[] data, Lotteries lotteryNumber)
 {
     public ulong? Id { get; set; }
-    public ulong UserId { get; set; }
-    public DateTime Date { get; set; }
-    public decimal Value { get; set; }
-    public BetTypes Type { get; set; }
-    public uint[] Data { get; set; }
-    public Lotteries LotteryNumber { get; set; }
+    public ulong UserId { get; set; } = userId;
+    public DateTime Date { get; set; } = date;
+    public decimal Value { get; set; } = value;
+    public BetTypes Type { get; set; } = type;
+    public uint[] Data { get; set; } = data;
+    public Lotteries LotteryNumber { get; set; } = lotteryNumber;
 
-    public BetsDto(ulong UserId, DateTime Date, decimal Value, BetTypes Type, uint[] Data, Lotteries LotteryNumber, ulong? Id)
-    {
-        this.Id = Id;
-        this.UserId = UserId;
-        this.Date = Date;
-        this.Value = Value;
-        this.Type = Type;
-        this.Data = Data;
-        this.LotteryNumber = LotteryNumber;
-    }
-
-    public BetsDto(Bets bets)
+    public BetsDto(Bets bets) : this(bets.UserId, bets.Date, bets.Value, bets.Type, bets.Data, bets.LotteryNumber)
     {
         this.Id = bets.Id;
-        this.UserId = bets.UserId;
-        this.Date = bets.Date;
-        this.Value = bets.Value;
-        this.Type = bets.Type;
-        this.Data = bets.Data;
-        this.LotteryNumber = bets.LotteryNumber;
     }
-    public BetsDto(ulong id, BetRequest bets)
+    public BetsDto(ulong id, BetRequest bets) : this(id, bets.Date, bets.Value, bets.Type, bets.Data, bets.LotteryNumber)
     {
-        this.UserId = id;
-        this.Date = bets.Date;
-        this.Value = bets.Value;
-        this.Type = bets.Type;
-        this.Data = bets.Data;
-        this.LotteryNumber = bets.LotteryNumber;
     }
 
     public override bool Equals(object? obj)

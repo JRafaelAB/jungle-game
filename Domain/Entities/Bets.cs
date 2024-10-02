@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs;
+using Domain.Extensions;
 using static Domain.Constants.Enums;
 
 namespace Domain.Entities;
@@ -16,20 +17,33 @@ public class Bets (ulong userId, DateTime date, decimal value, BetTypes type, ui
     
 
     public Bets(BetsDto betsDto) : this(betsDto.UserId, betsDto.Date, betsDto.Value, betsDto.Type, betsDto.Data, betsDto.LotteryNumber,betsDto.Id) { }
+    
+    protected bool Equals(Bets other)
+    {
+        return UserId == other.UserId && Date.Equals(other.Date) && Value == other.Value && Type == other.Type && Data.EqualsTo(other.Data) && LotteryNumber == other.LotteryNumber;
+    }
 
     public override bool Equals(object? obj)
     {
-        return obj is Bets bets &&
-               UserId == bets.UserId &&
-               Date == bets.Date &&
-               Value == bets.Value &&
-               Type == bets.Type &&
-               EqualityComparer<uint[]>.Default.Equals(Data, bets.Data) &&
-               LotteryNumber == bets.LotteryNumber;
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Bets)obj);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(UserId, Date, Value, Type, Data, LotteryNumber);
+        return HashCode.Combine(UserId, Date, Value, (int)Type, Data, (int)LotteryNumber);
     }
+
+    public static bool operator ==(Bets? left, Bets? right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Bets? left, Bets? right)
+    {
+        return !Equals(left, right);
+    }
+    
 }

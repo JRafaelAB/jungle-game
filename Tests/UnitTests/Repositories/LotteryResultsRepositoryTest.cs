@@ -5,12 +5,12 @@ namespace UnitTests.Repositories;
 
 public class LotteryResultsRepositoryTest
 {
-    private readonly JungleContextMock contextMock = new ("lottery");
+    private readonly JungleContextMock _contextMock = new ("lottery");
     
     [Fact]
     public async Task Test_Add_New_LotteryResults()
     {
-        var context = await contextMock.StartNewContext();
+        var context = await _contextMock.StartNewContext();
         var repository = new LotteryResultsRepository(context);
         await repository.AddLotteryResults(JungleContextMock.Lottery1Dto);
         await context.SaveChangesAsync();
