@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests;
 
-public class JungleContextMock(string databaseName)
+public static class JungleContextMock
 {
-    public async Task<JungleContext> StartNewContext()
+    public static async Task<JungleContext> StartNewContext()
     {
         var options = new DbContextOptionsBuilder<JungleContext>()
-            .UseInMemoryDatabase(databaseName: databaseName)
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
         var context = new JungleContext(options);

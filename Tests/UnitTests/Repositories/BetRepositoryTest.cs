@@ -5,12 +5,10 @@ namespace UnitTests.Repositories
 {
     public class BetRepositoryTest
     {
-        private readonly JungleContextMock _contextMock = new("bet");
-
         [Fact]
         public async Task Add_New_Bet()
         {
-            await using var context = await _contextMock.StartNewContext();
+            await using var context = await JungleContextMock.StartNewContext();
             var repository = new BetsRepository(context);
             await repository.AddBets(JungleContextMock.BetUser1Dto);
             await context.SaveChangesAsync();
