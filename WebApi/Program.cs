@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Domain.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using WebApi.Modules.Middlewares;
 using WebApi.Modules.ServiceCollectionExtensions;
 
@@ -16,6 +18,25 @@ builder.Services
     .AddUseCases()
     .AddCronJobs()
     .AddHttpClients(builder.Configuration);
+
+builder.Services.AddCognitoIdentity();
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["Cognito:Authority"];
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("Admin", policy => policy.RequireClaim("cognito:groups", "PantryAdmin"));
 
 Configuration.SetConfiguration(builder.Configuration);
 
@@ -33,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

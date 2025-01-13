@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.GetUser;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.GetUser;
@@ -23,4 +24,15 @@ public class UsersController(IGetUserUseCase useCase) : BaseController
     {
         return Ok(await useCase.Execute(user));
     }
+    
+    /*
+    [HttpGet("helloWorld")]
+    [Authorize(Policy = "Admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetUser()
+    {
+        return Ok("Hello World");
+    }
+    */
 }
